@@ -1,0 +1,86 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Rebrand to Furever in Our Hearts and update hero gallery with headstone memorials",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Rebrand all 'Eternal Paws' references to 'Furever in Our Hearts' across the entire frontend",
+      "acceptanceCriteria": [
+        "Header displays 'Furever in Our Hearts' as the brand name",
+        "Footer shows 'Furever in Our Hearts' branding",
+        "No references to 'Eternal Paws' remain anywhere on the site"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/marketing/Header.tsx",
+          "operation": "modify",
+          "description": "Update the brand name in the header logo and navigation from 'Eternal Paws' to 'Furever in Our Hearts'"
+        },
+        {
+          "path": "frontend/src/components/marketing/Footer.tsx",
+          "operation": "modify",
+          "description": "Replace footer branding text from 'Eternal Paws' to 'Furever in Our Hearts'"
+        },
+        {
+          "path": "frontend/index.html",
+          "operation": "modify",
+          "description": "Update the page title from 'Eternal Paws' to 'Furever in Our Hearts'"
+        },
+        {
+          "path": "frontend/src/components/marketing/Sections/Hero.tsx",
+          "operation": "modify",
+          "description": "Update any 'Eternal Paws' references in hero section headline or description to 'Furever in Our Hearts'"
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Replace top row showcase images with the yorkie headstone memorial",
+      "acceptanceCriteria": [
+        "Top row of memorial showcase displays only the headstone design with yorkie",
+        "Image shows grass and pebble stones at the base as in the hero image"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/marketing/Sections/ShapeShowcases.tsx",
+          "operation": "modify",
+          "description": "Replace the first showcase row image with the yorkie headstone memorial at frontend/public/assets/generated/yorkie-headstone-nabi-v2.dim_600x800.png, ensuring it displays the grass and pebble stones at the base"
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Wire generated bird and cat headstone images into the showcase gallery",
+      "acceptanceCriteria": [
+        "Bird memorial displays as a headstone with grass and pebbles at base",
+        "Cat memorial displays as a headstone with grass and pebbles at base",
+        "Both match the visual style of the yorkie headstone"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/marketing/Sections/ShapeShowcases.tsx",
+          "operation": "modify",
+          "description": "Add the bird headstone memorial at frontend/public/assets/generated/bird-headstone.dim_600x800.png and the cat headstone memorial at frontend/public/assets/generated/cat-headstone.dim_600x800.png to the showcase gallery, ensuring they display with grass and pebble stones at the base matching the yorkie headstone aesthetic"
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Ensure nameplates are visible on all headstone memorials in the showcase",
+      "acceptanceCriteria": [
+        "Yorkie headstone displays 'Nabi' on a nameplate at the bottom",
+        "Bird headstone displays the bird's name on a nameplate at the bottom",
+        "Cat headstone displays the cat's name on a nameplate at the bottom",
+        "Nameplates are clearly visible and styled consistently across all memorials"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/marketing/Sections/ShapeShowcases.tsx",
+          "operation": "modify",
+          "description": "Add caption or alt text for each headstone memorial referencing the nameplate: 'Nabi' for the yorkie at frontend/public/assets/generated/yorkie-headstone-nabi-v2.dim_600x800.png, 'Tweety' for the bird at frontend/public/assets/generated/bird-headstone.dim_600x800.png, and 'Whiskers' for the cat at frontend/public/assets/generated/cat-headstone.dim_600x800.png. Ensure the nameplates in the images are clearly visible and consistently styled."
+        }
+      ]
+    }
+  ]
+}

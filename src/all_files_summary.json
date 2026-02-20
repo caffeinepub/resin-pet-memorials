@@ -1,0 +1,23 @@
+{
+  "backend/main.mo": "Main backend actor that includes blob storage mixin and provides a storePhoto function to save uploaded pet photos with names to a Map.",
+  "feature_evidence.json": "Feature evidence report documenting four completed features: rebranding to 'Furever in Our Hearts', replacing showcase images with headstone memorials, creating matching headstone designs for bird/cat, and adding nameplates to all memorials.",
+  "frontend-file-summaries.txt": "JSON-formatted summaries of all frontend files describing the marketing site structure, rebranding changes, headstone memorial designs, and pet photo upload functionality.",
+  "frontend/index.css": "Tailwind CSS configuration with OKLCH color tokens defining light and dark theme variables for a warm neutral palette with terracotta primary and botanical green accents.",
+  "frontend/index.html": "HTML entry point with updated page title 'Furever in Our Hearts - Pet Memorials' and root div for React mounting.",
+  "frontend/src/App.tsx": "Root React component that assembles the complete marketing page layout with Header, Hero, AboutResin, ShapeShowcases, PetPhotoUpload, ProcessSteps, and Footer sections.",
+  "frontend/src/components/marketing/Footer.tsx": "Footer component with 'Furever in Our Hearts' branding, navigation links, contact info, copyright notice, and caffeine.ai attribution with UTM tracking.",
+  "frontend/src/components/marketing/Header.tsx": "Sticky header with Heart icon, 'Furever in Our Hearts' branding, smooth-scroll navigation to sections (About, Designs, Upload Photo, Process), and responsive menu.",
+  "frontend/src/components/marketing/Sections/AboutResin.tsx": "About section explaining three key features of resin memorials: crystal clear resin, natural elements (flowers/grass), and professionally printed photographs.",
+  "frontend/src/components/marketing/Sections/Hero.tsx": "Hero section with headline, description emphasizing unique handcrafted memorials, CTA buttons, and yorkie headstone memorial image (Nabi) as the main visual.",
+  "frontend/src/components/marketing/Sections/PetPhotoUpload.tsx": "React component providing a file upload form for pet photos with validation, preview, and submission using the usePetPhotoSubmission hook. Displays success/error alerts and handles file input reset.",
+  "frontend/src/components/marketing/Sections/ProcessSteps.tsx": "Static marketing section component displaying a 4-step process (Capture, Print, Placement, Resin Pour) for creating pet memorials using cards with icons and descriptions.",
+  "frontend/src/components/marketing/Sections/ShapeShowcases.tsx": "Marketing section displaying 6 memorial design options (3 headstones for different pets, plus heart/hexagon/square shapes) in a responsive grid with images, badges, and descriptions.",
+  "frontend/src/hooks/useActor.ts": "React Query hook that creates and manages a backend actor instance based on Internet Identity authentication state, invalidating dependent queries when the actor changes.",
+  "frontend/src/hooks/useInternetIdentity.ts": "React context provider and hook for Internet Identity authentication, managing login/logout state, identity persistence, and AuthClient configuration with delegation handling.",
+  "frontend/src/hooks/usePetPhotoSubmission.ts": "Custom hook managing pet photo upload state and submission to backend actor, converting files to ExternalBlob with progress tracking and handling success/error states.",
+  "frontend/src/hooks/useQueries.ts": "Empty placeholder file reserved for future React Query hooks when backend integration is needed.",
+  "frontend/src/index.css": "Global CSS with Tailwind imports, custom CSS variables for light/dark theme color palettes (warm neutrals, terracotta primary, botanical accents), and font family definitions using Crimson Pro and Inter.",
+  "frontend/src/main.tsx": "Application entry point that renders the root component wrapped in QueryClientProvider and InternetIdentityProvider for React Query and authentication context.",
+  "frontend/tailwind.config.js": "Tailwind CSS configuration file defining custom theme extensions including OKLCH color system with CSS variables, custom fonts (Crimson Pro, Inter), container settings, border radius variables, accordion animations, and plugins for typography, container queries, and animations.",
+  "project_state.json": "Project state tracking file for 'Furever in Our Hearts' pet memorial website, documenting completed features including branding changes from 'Eternal Paws', headstone memorial designs for yorkie (Nabi), bird (Tweety), and cat (Whiskers) with nameplates and natural elements, plus image requirements for bird and cat headstones."
+}

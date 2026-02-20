@@ -1,0 +1,99 @@
+{
+  "kind": "build_request",
+  "title": "Rebrand to Furever in Our Hearts and update hero gallery with headstone memorials",
+  "projectName": "Furever in Our Hearts",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Change all instances of 'Eternal Paws' branding to 'Furever in Our Hearts' across the entire site including header logo, footer branding, page title, and any other text references",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-current"
+        ],
+        "quotes": [
+          "Change the name from eternal paws to furever in our hearts"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Header displays 'Furever in Our Hearts' as the brand name",
+        "Footer shows 'Furever in Our Hearts' branding",
+        "No references to 'Eternal Paws' remain anywhere on the site"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Replace the top row of showcase images with the headstone memorial photo featuring the yorkie named Nabi",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-current"
+        ],
+        "quotes": [
+          "change the top row of pictures to the headstone photo"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Top row of memorial showcase displays only the headstone design with yorkie",
+        "Image shows grass and pebble stones at the base as in the hero image"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Create headstone-style memorial designs for the bird and cat, each featuring grass and small pebble stones at the base, matching the yorkie headstone aesthetic",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-current"
+        ],
+        "quotes": [
+          "put the bird and cat in a headstone"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Bird memorial displays as a headstone with grass and pebbles at base",
+        "Cat memorial displays as a headstone with grass and pebbles at base",
+        "Both match the visual style of the yorkie headstone"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Add a nameplate at the bottom of each headstone memorial (yorkie, bird, and cat) displaying the animal's name - Nabi for the yorkie, and appropriate names for the bird and cat",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-current"
+        ],
+        "quotes": [
+          "Put a name plate at bottom of each with name of animal"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Yorkie headstone displays 'Nabi' on a nameplate at the bottom",
+        "Bird headstone displays the bird's name on a nameplate at the bottom",
+        "Cat headstone displays the cat's name on a nameplate at the bottom",
+        "Nameplates are clearly visible and styled consistently across all memorials"
+      ]
+    }
+  ],
+  "constraints": [
+    "Maintain existing backend photo storage functionality",
+    "Preserve upload form and validation logic",
+    "Do not modify immutable frontend paths (hooks/useInternetIdentity, hooks/useActor, main.tsx, components/ui)"
+  ],
+  "nonGoals": [
+    "Changing the memorial creation process steps",
+    "Modifying the photo upload functionality",
+    "Altering the backend actor structure"
+  ],
+  "imageRequirements": {
+    "required": [
+      "Headstone memorial with a realistic bird portrait, nameplate with 'Tweety' at bottom, grass and small pebble stones at base (bird-headstone.dim_600x800.png)",
+      "Headstone memorial with a realistic cat portrait, nameplate with 'Whiskers' at bottom, grass and small pebble stones at base (cat-headstone.dim_600x800.png)"
+    ],
+    "edits": [
+      "Update nameplate text to read 'Nabi' more prominently (yorkie-headstone-nabi.png > yorkie-headstone-nabi-v2.dim_600x800.png)"
+    ]
+  }
+}

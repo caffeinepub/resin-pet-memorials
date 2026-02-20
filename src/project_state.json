@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Pet memorial website project with custom headstone designs featuring individual animals (yorkie, bird, cat) with nameplates and natural elements",
+  "architectural_notes": [
+    "Hero image: headstone memorial with yorkie (Nabi), grass, and pebbles",
+    "Top row displays headstone-style memorials for each animal type",
+    "Each memorial includes nameplate with animal name at bottom",
+    "Description emphasizes uniqueness - no exact duplicates"
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Headstone memorial with a realistic bird portrait, nameplate with 'Tweety' at bottom, grass and small pebble stones at base (bird-headstone.dim_600x800.png)\n- Headstone memorial with a realistic cat portrait, nameplate with 'Whiskers' at bottom, grass and small pebble stones at base (cat-headstone.dim_600x800.png)\n\n## Edit Images\n- Update nameplate text to read 'Nabi' more prominently (yorkie-headstone-nabi.png > yorkie-headstone-nabi-v2.dim_600x800.png)",
+  "existing_features": [
+    {
+      "id": "feature-change-all-instances-of-eternal-paws-branding-to-furever-in-our-hearts-across-the-entire-site-including-header-logo-footer-branding-page-title-and-any-other-text-references",
+      "title": "Change all instances of 'Eternal Paws' branding to 'Furever in Our Hearts' across the entire site including header logo, footer branding, page title, and any other text references",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-top-row-of-showcase-images-with-the-headstone-memorial-photo-featuring-the-yorkie-named-nabi",
+      "title": "Replace the top row of showcase images with the headstone memorial photo featuring the yorkie named Nabi",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-headstone-style-memorial-designs-for-the-bird-and-cat-each-featuring-grass-and-small-pebble-stones-at-the-base-matching-the-yorkie-headstone-aesthetic",
+      "title": "Create headstone-style memorial designs for the bird and cat, each featuring grass and small pebble stones at the base, matching the yorkie headstone aesthetic",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-nameplate-at-the-bottom-of-each-headstone-memorial-yorkie-bird-and-cat-displaying-the-animal-s-name-nabi-for-the-yorkie-and-appropriate-names-for-the-bird-and-cat",
+      "title": "Add a nameplate at the bottom of each headstone memorial (yorkie, bird, and cat) displaying the animal's name - Nabi for the yorkie, and appropriate names for the bird and cat",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [],
+  "projectName": "Furever in Our Hearts",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

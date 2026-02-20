@@ -1,0 +1,15 @@
+{
+  "frontend/src/App.tsx": "Main application component that renders the complete marketing page structure with header, hero, about, showcases, pet photo upload, process sections, and footer.",
+  "frontend/src/components/marketing/Header.tsx": "Sticky navigation header with updated branding to \"Furever in Our Hearts\" using Heart icon, smooth-scroll navigation links, and responsive menu",
+  "frontend/src/components/marketing/Sections/Hero.tsx": "Hero section featuring headline, updated description mentioning unique memorials, CTA buttons, and yorkie headstone memorial as main hero image",
+  "frontend/src/components/marketing/Sections/AboutResin.tsx": "About section explaining the three key features of resin memorials: clear resin, natural elements, and printed photographs.",
+  "frontend/src/components/marketing/Sections/ShapeShowcases.tsx": "Design showcase section displaying six memorials with top three being headstone designs (Nabi yorkie, Tweety bird, Whiskers cat) featuring nameplates, grass and pebbles, followed by heart, hexagon, and square shapes",
+  "frontend/src/components/marketing/Sections/ProcessSteps.tsx": "Process section outlining the four-step creation process from photo capture to resin curing with numbered cards.",
+  "frontend/src/components/marketing/Footer.tsx": "Footer component with updated \"Furever in Our Hearts\" branding, navigation links, contact info, and caffeine.ai attribution with UTM tracking",
+  "frontend/src/index.css": "Global styles defining warm neutral color palette (terracotta primary, botanical green accent) with OKLCH tokens and custom typography (Crimson Pro serif, Inter sans-serif).",
+  "frontend/tailwind.config.js": "Tailwind configuration extending the theme with custom fonts (Crimson Pro, Inter), container padding, and maintaining OKLCH color system integration.",
+  "frontend/src/hooks/useQueries.ts": "Placeholder file for future React Query hooks; currently empty as no backend integration is needed for this static marketing site.",
+  "frontend/src/components/marketing/Sections/PetPhotoUpload.tsx": "Pet photo upload section with file picker, image preview, client-side validation for image files only, submission to backend via actor, and success/error state handling.",
+  "frontend/src/hooks/usePetPhotoSubmission.ts": "Custom hook that encapsulates pet photo submission logic including file-to-bytes conversion, ExternalBlob creation with upload progress tracking, backend actor integration, and state management for submission status.",
+  "frontend/index.html": "HTML entry point with updated page title to \"Furever in Our Hearts - Pet Memorials\""
+}

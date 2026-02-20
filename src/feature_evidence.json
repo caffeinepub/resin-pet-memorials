@@ -1,0 +1,84 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-change-all-instances-of-eternal-paws-branding-to-furever-in-our-hearts-across-the-entire-site-including-header-logo-footer-branding-page-title-and-any-other-text-references",
+      "featureTitle": "Change all instances of 'Eternal Paws' branding to 'Furever in Our Hearts' across the entire site including header logo, footer branding, page title, and any other text references",
+      "files": [
+        "frontend/index.html",
+        "frontend/src/components/marketing/Footer.tsx",
+        "frontend/src/components/marketing/Header.tsx",
+        "frontend/src/components/marketing/Sections/Hero.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-replace-the-top-row-of-showcase-images-with-the-headstone-memorial-photo-featuring-the-yorkie-named-nabi",
+      "featureTitle": "Replace the top row of showcase images with the headstone memorial photo featuring the yorkie named Nabi",
+      "files": [
+        "frontend/src/components/marketing/Sections/ShapeShowcases.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-headstone-style-memorial-designs-for-the-bird-and-cat-each-featuring-grass-and-small-pebble-stones-at-the-base-matching-the-yorkie-headstone-aesthetic",
+      "featureTitle": "Create headstone-style memorial designs for the bird and cat, each featuring grass and small pebble stones at the base, matching the yorkie headstone aesthetic",
+      "files": [
+        "frontend/src/components/marketing/Sections/ShapeShowcases.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-nameplate-at-the-bottom-of-each-headstone-memorial-yorkie-bird-and-cat-displaying-the-animal-s-name-nabi-for-the-yorkie-and-appropriate-names-for-the-bird-and-cat",
+      "featureTitle": "Add a nameplate at the bottom of each headstone memorial (yorkie, bird, and cat) displaying the animal's name - Nabi for the yorkie, and appropriate names for the bird and cat",
+      "files": [
+        "frontend/src/components/marketing/Sections/ShapeShowcases.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    }
+  ]
+}
