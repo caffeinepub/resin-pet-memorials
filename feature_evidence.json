@@ -2,10 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-generate-a-new-heart-shaped-resin-memorial-image-that-includes-a-cat-portrait-replacing-or-updating-the-whiskers-memorial-image-retaining-the-existing-flowers-and-grass-decorations-with-a-black-frame-border-surrounding-the-cat-s-portrait-within-the-resin-mold",
-      "featureTitle": "Generate a new heart-shaped resin memorial image that includes a cat portrait (replacing or updating the Whiskers memorial image), retaining the existing flowers and grass decorations, with a black frame border surrounding the cat's portrait within the resin mold.",
+      "featureId": "feature-add-first-name-and-last-name-input-fields-to-the-order-form-in-orderform-tsx-positioned-immediately-before-the-shipping-address-fields-both-fields-should-be-required-and-their-values-should-be-included-in-the-order-submission-payload",
+      "featureTitle": "Add 'First Name' and 'Last Name' input fields to the order form in OrderForm.tsx, positioned immediately before the shipping address fields. Both fields should be required and their values should be included in the order submission payload.",
       "files": [
-        "frontend/src/components/marketing/Sections/ShapeShowcases.tsx"
+        "frontend/src/components/order/OrderForm.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -24,10 +24,10 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-generate-a-new-hexagon-shaped-resin-memorial-image-that-includes-a-bird-portrait-replacing-or-updating-the-tweety-memorial-image-retaining-the-existing-flowers-and-grass-decorations-with-a-black-frame-border-surrounding-the-bird-s-portrait-within-the-resin-mold",
-      "featureTitle": "Generate a new hexagon-shaped resin memorial image that includes a bird portrait (replacing or updating the Tweety memorial image), retaining the existing flowers and grass decorations, with a black frame border surrounding the bird's portrait within the resin mold.",
+      "featureId": "feature-remove-the-internet-identity-login-logout-button-from-the-header-component-frontend-src-components-marketing-header-tsx-so-that-the-sticky-header-contains-only-the-logo-and-navigation-links-with-no-authentication-controls-visible",
+      "featureTitle": "Remove the Internet Identity login/logout button from the Header component (frontend/src/components/marketing/Header.tsx) so that the sticky header contains only the logo and navigation links, with no authentication controls visible.",
       "files": [
-        "frontend/src/components/marketing/Sections/ShapeShowcases.tsx"
+        "frontend/src/components/marketing/Header.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -46,10 +46,10 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-update-the-square-resin-memorial-image-nabi-so-the-animal-portrait-also-has-a-black-frame-border-surrounding-it-within-the-resin-mold-consistent-with-the-framing-applied-to-the-heart-and-hexagon-memorials",
-      "featureTitle": "Update the square resin memorial image (Nabi) so the animal portrait also has a black frame border surrounding it within the resin mold, consistent with the framing applied to the heart and hexagon memorials.",
+      "featureId": "feature-add-the-contact-email-address-all4funflorida-gmail-com-to-the-very-bottom-of-the-website-in-the-footer-component-frontend-src-components-marketing-footer-tsx-presented-as-a-clickable-mailto-link-with-a-label-such-as-questions-email-us-at-all4funflorida-gmail-com",
+      "featureTitle": "Add the contact email address 'all4funflorida@gmail.com' to the very bottom of the website in the Footer component (frontend/src/components/marketing/Footer.tsx), presented as a clickable mailto link with a label such as 'Questions? Email us at all4funflorida@gmail.com'.",
       "files": [
-        "frontend/src/components/marketing/Sections/ShapeShowcases.tsx"
+        "frontend/src/components/marketing/Footer.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -64,28 +64,6 @@
       ],
       "testIds": [
         "REQ-3"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-update-the-shapeshowcases-component-to-render-the-newly-generated-heart-hexagon-and-square-memorial-images-from-frontend-public-assets-generated-replacing-any-previously-used-image-sources-for-these-three-memorials",
-      "featureTitle": "Update the ShapeShowcases component to render the newly generated heart, hexagon, and square memorial images from frontend/public/assets/generated, replacing any previously used image sources for these three memorials.",
-      "files": [
-        "frontend/src/components/marketing/Sections/ShapeShowcases.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "blob-storage@4.0.0",
-        "stripe@3.0.0",
-        "http-outcalls@3.0.0",
-        "authorization@4.0.0"
-      ],
-      "testIds": [
-        "REQ-4"
       ],
       "confidence": "high"
     }

@@ -5,27 +5,35 @@ export default function ShapeShowcases() {
   const shapes = [
     {
       name: 'Nabi',
-      image: '/assets/generated/nabi-square-memorial.dim_600x600.png',
-      description: 'A beloved Yorkie forever preserved in a classic square resin keepsake. Nabi\'s portrait — framed in black — is surrounded by delicate pressed flowers and blades of green grass inside crystal-clear resin.',
+      image: '/assets/generated/resin-square-mold.dim_600x600.png',
+      description: 'A beloved Yorkie forever preserved in a classic square clear resin keepsake. Crystal-clear transparent resin filled with delicate pressed flowers and green grass surrounds a small black square frame holding Nabi\'s portrait inside.',
       badge: 'Square',
-      alt: 'Square clear resin memorial with Yorkie dog portrait in black frame, flowers, and grass embedded inside',
-      hasPortrait: true,
+      alt: 'Square clear transparent resin memorial with Yorkie dog portrait in small black square frame, flowers, and grass embedded inside',
+      aspectClass: 'aspect-square',
     },
     {
       name: 'Whiskers',
-      image: '/assets/generated/whiskers-heart-memorial.dim_600x600.png',
-      description: 'A heart-shaped resin memorial featuring a beautiful cat portrait framed in black, nestled among soft pressed flowers and lush green grass — a symbol of the unconditional love shared with Whiskers.',
+      image: '/assets/generated/resin-heart-mold.dim_600x600.png',
+      description: 'A heart-shaped clear resin memorial with soft pressed flowers and lush green grass embedded throughout. A small black square frame holding Whiskers\' cat portrait sits beautifully inside the translucent heart.',
       badge: 'Heart',
-      alt: 'Heart-shaped clear resin memorial with cat portrait in black frame, flowers, and grass embedded inside for Whiskers',
-      hasPortrait: true,
+      alt: 'Heart-shaped clear transparent resin memorial with cat portrait in small black square frame, flowers, and grass embedded inside for Whiskers',
+      aspectClass: 'aspect-square',
     },
     {
       name: 'Tweety',
-      image: '/assets/generated/tweety-hexagon-memorial.dim_600x600.png',
-      description: 'A modern hexagonal resin mold showcasing a stunning bird portrait framed in black, surrounded by vibrant pressed flowers and natural grass blades — preserving Tweety\'s memory in an elegant geometric keepsake.',
+      image: '/assets/generated/resin-hexagon-mold.dim_600x600.png',
+      description: 'A modern hexagonal clear resin mold filled with vibrant pressed flowers and natural grass blades. Tweety\'s bird portrait is displayed inside a small black square frame nestled within the crystal-clear translucent resin.',
       badge: 'Hexagon',
-      alt: 'Hexagonal clear resin memorial with bird portrait in black frame, flowers, and grass embedded inside for Tweety',
-      hasPortrait: true,
+      alt: 'Hexagonal clear transparent resin memorial with bird portrait in small black square frame, flowers, and grass embedded inside for Tweety',
+      aspectClass: 'aspect-square',
+    },
+    {
+      name: 'Buddy',
+      image: '/assets/generated/resin-headstone-mold.dim_600x600.png',
+      description: 'A timeless headstone-shaped clear resin memorial adorned with delicate flowers and lush grass throughout the transparent mold. Buddy\'s Labrador portrait is lovingly displayed inside a small black square frame within the crystal-clear resin.',
+      badge: 'Headstone',
+      alt: 'Headstone-shaped clear transparent resin memorial with Labrador Retriever portrait in small black square frame, flowers, and grass embedded inside for Buddy',
+      aspectClass: 'aspect-square',
     },
   ];
 
@@ -37,28 +45,19 @@ export default function ShapeShowcases() {
             Choose Your Design
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            Each shape tells a story. Select the design that best reflects your pet's personality and the love you shared together. Every memorial is unique and nothing is duplicated exactly.
+            Each shape tells a story. Select the design that best reflects your pet's personality and the love you shared together. Every memorial is crafted with crystal-clear resin, embedded flowers and grass, and a small black square frame holding your pet's portrait.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
           {shapes.map((shape, index) => (
             <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow">
-              <div className="aspect-square overflow-hidden bg-muted relative">
+              <div className={`${shape.aspectClass} overflow-hidden bg-muted`}>
                 <img
                   src={shape.image}
                   alt={shape.alt}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                 />
-                {shape.hasPortrait && (
-                  <div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{
-                      boxShadow: 'inset 0 0 0 6px #000000',
-                    }}
-                    aria-hidden="true"
-                  />
-                )}
               </div>
               <CardHeader>
                 <div className="flex items-center justify-between mb-2">

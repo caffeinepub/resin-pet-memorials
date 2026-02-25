@@ -1,5 +1,4 @@
 import Map "mo:core/Map";
-import Text "mo:core/Text";
 import Nat "mo:core/Nat";
 import Principal "mo:core/Principal";
 import Iter "mo:core/Iter";
@@ -7,12 +6,12 @@ import Runtime "mo:core/Runtime";
 import MixinStorage "blob-storage/Mixin";
 import MixinAuthorization "authorization/MixinAuthorization";
 import AccessControl "authorization/access-control";
+import Migration "migration";
 import Storage "blob-storage/Storage";
 import Stripe "stripe/stripe";
 import OutCall "http-outcalls/outcall";
 
-
-
+(with migration = Migration.run)
 actor {
   type UserProfile = {
     name : Text;
@@ -24,6 +23,14 @@ actor {
     birthDate : Nat;
     deathDate : Nat;
     photo : ?Storage.ExternalBlob;
+  };
+
+  type HeadstoneDesign = {
+    peninsulaFrame : Storage.ExternalBlob;
+    ovalFrame : Storage.ExternalBlob;
+    squareFrame : Storage.ExternalBlob;
+    roundFrame : Storage.ExternalBlob;
+    headstoneFrame : Storage.ExternalBlob;
   };
 
   type PaymentStatus = {
@@ -38,12 +45,36 @@ actor {
     #crypto;
   };
 
-  type AstCloudOrder = {
+  public type Address = {
+    streetAddress : Text;
+    addressLine2 : ?Text;
+    city : Text;
+    stateOrProvince : Text;
+    postalCode : Text;
+    country : Text;
+    phoneNumber : Text;
+  };
+
+  public type ContactInfo = {
+    email : Text;
+    phoneNumber : Text;
+  };
+
+  public type BuyerInfo = {
+    firstName : Text;
+    lastName : Text;
+  };
+
+  public type AstCloudOrder = {
     id : Nat;
     owner : Principal;
     animal : Animal;
+    headstoneDesign : HeadstoneDesign;
     paymentMethod : PaymentMethod;
     paymentStatus : PaymentStatus;
+    shippingAddress : Address;
+    buyerInfo : BuyerInfo; // new field
+    contactInfo : ContactInfo;
   };
 
   include MixinStorage();
@@ -79,7 +110,7 @@ actor {
     userProfiles.add(caller, profile);
   };
 
-  /// Retrieves orders for the caller.
+  // The getOrders function returns all orders for admins and only the caller's own orders for non-admin users.
   public query ({ caller }) func getOrders() : async [AstCloudOrder] {
     let allOrders = orders.values().toArray();
 
@@ -98,37 +129,64 @@ actor {
     userOrders;
   };
 
-  /// Submits an order for authenticated users.
+  // The submitOrder function processes orders, associating them with the caller and including
+  // a buyerInfo object within the order.
   public shared ({ caller }) func submitOrder(
-    name : Text,
+    animalName : Text,
     birthDate : Nat,
     deathDate : Nat,
     paymentMethod : PaymentMethod,
     photo : Storage.ExternalBlob,
+    peninsulaFrame : Storage.ExternalBlob,
+    ovalFrame : Storage.ExternalBlob,
+    squareFrame : Storage.ExternalBlob,
+    roundFrame : Storage.ExternalBlob,
+    headstoneFrame : Storage.ExternalBlob,
+    shippingAddress : Address,
+    buyerInfo : BuyerInfo,
+    contactInfo : ContactInfo,
   ) : async Nat {
     if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
       Runtime.trap("Unauthorized: Only users can submit orders");
     };
 
     let animal = {
-      name;
+      name = animalName;
       birthDate;
       deathDate;
       photo = ?photo;
     };
 
-    let order = {
+    let headstoneDesign = {
+      peninsulaFrame;
+      ovalFrame;
+      squareFrame;
+      roundFrame;
+      headstoneFrame;
+    };
+
+    let order : AstCloudOrder = {
       id = nextOrderId;
       owner = caller;
       animal;
+      headstoneDesign;
       paymentMethod;
       paymentStatus = #pending;
+      shippingAddress;
+      buyerInfo = buyerInfo;
+      contactInfo;
     };
 
     orders.add(nextOrderId, order);
     nextOrderId += 1;
 
     order.id;
+  };
+
+  /// Retrieves all headstone designs.
+  public query func getAllHeadstoneDesigns() : async [HeadstoneDesign] {
+    let allOrders = orders.values().toArray();
+    allOrders.map(func(order) { order.headstoneDesign });
   };
 
   // Stripe Integration using the component's core functionalities
@@ -158,6 +216,9 @@ actor {
   };
 
   public shared ({ caller }) func createCheckoutSession(items : [Stripe.ShoppingItem], successUrl : Text, cancelUrl : Text) : async Text {
+    if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
+      Runtime.trap("Unauthorized: Only users can create checkout sessions");
+    };
     await Stripe.createCheckoutSession(getStripeConfiguration(), caller, items, successUrl, cancelUrl, transform);
   };
 

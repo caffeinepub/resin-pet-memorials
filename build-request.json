@@ -1,99 +1,79 @@
 {
   "kind": "build_request",
-  "title": "Add cat to heart memorial, bird to hexagon memorial, with black frames on all animal portraits",
-  "projectName": "Furever Keepsakes and Memorials",
+  "title": "Add name fields to order form, remove login button, add contact email to footer",
+  "projectName": "Furever Keepsakes",
   "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Generate a new heart-shaped resin memorial image that includes a cat portrait (replacing or updating the Whiskers memorial image), retaining the existing flowers and grass decorations, with a black frame border surrounding the cat's portrait within the resin mold.",
-      "target": "frontend",
+      "text": "Add 'First Name' and 'Last Name' input fields to the order form in OrderForm.tsx, positioned immediately before the shipping address fields. Both fields should be required and their values should be included in the order submission payload.",
+      "target": "both",
       "source": {
         "messageIds": [
-          "msg-7"
+          "msg-1"
         ],
         "quotes": [
-          "put a picture of a cat in the heart shape resin memorial",
-          "Surround all the animal pictures within the resin molds with a black frame around the image of the animal"
+          "before the shipping address needs to be the first and last name of the person shipping to"
         ]
       },
       "acceptanceCriteria": [
-        "The heart-shaped resin memorial displays a visible cat portrait",
-        "The cat portrait has a black frame/border around it within the mold",
-        "Flowers and grass decorations remain visible in the heart mold image"
+        "A 'First Name' text input appears directly above the shipping address section in the order form",
+        "A 'Last Name' text input appears directly below 'First Name' and above the shipping address section",
+        "Both fields are required and show validation errors if left blank on submission",
+        "First and last name values are sent as part of the order submission data to the backend"
       ]
     },
     {
       "id": "REQ-2",
-      "text": "Generate a new hexagon-shaped resin memorial image that includes a bird portrait (replacing or updating the Tweety memorial image), retaining the existing flowers and grass decorations, with a black frame border surrounding the bird's portrait within the resin mold.",
+      "text": "Remove the Internet Identity login/logout button from the Header component (frontend/src/components/marketing/Header.tsx) so that the sticky header contains only the logo and navigation links, with no authentication controls visible.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-7"
+          "msg-1"
         ],
         "quotes": [
-          "put a picture of a bird in the hexagon shape memorial",
-          "Surround all the animal pictures within the resin molds with a black frame around the image of the animal"
+          "We also dont need a log in button at the top if this is just a simple order form and payment method"
         ]
       },
       "acceptanceCriteria": [
-        "The hexagon-shaped resin memorial displays a visible bird portrait",
-        "The bird portrait has a black frame/border around it within the mold",
-        "Flowers and grass decorations remain visible in the hexagon mold image"
+        "The login/logout button is no longer visible in the header on desktop or mobile",
+        "The mobile menu also does not contain a login/logout option",
+        "The header still displays the logo and navigation links correctly"
       ]
     },
     {
       "id": "REQ-3",
-      "text": "Update the square resin memorial image (Nabi) so the animal portrait also has a black frame border surrounding it within the resin mold, consistent with the framing applied to the heart and hexagon memorials.",
+      "text": "Add the contact email address 'all4funflorida@gmail.com' to the very bottom of the website in the Footer component (frontend/src/components/marketing/Footer.tsx), presented as a clickable mailto link with a label such as 'Questions? Email us at all4funflorida@gmail.com'.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-7"
+          "msg-1"
         ],
         "quotes": [
-          "Surround all the animal pictures within the resin molds with a black frame around the image of the animal"
+          "Add the email address for people to ask questions to at the very bottom of the website. all4funflorida@gmail.com"
         ]
       },
       "acceptanceCriteria": [
-        "The square resin memorial (Nabi) animal portrait is surrounded by a black frame within the mold",
-        "Existing flowers and grass decorations are preserved"
-      ]
-    },
-    {
-      "id": "REQ-4",
-      "text": "Update the ShapeShowcases component to render the newly generated heart, hexagon, and square memorial images from frontend/public/assets/generated, replacing any previously used image sources for these three memorials.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-7"
-        ],
-        "quotes": [
-          "put a picture of a cat in the heart shape resin memorial",
-          "put a picture of a bird in the hexagon shape memorial"
-        ]
-      },
-      "acceptanceCriteria": [
-        "All three memorial shape cards in ShapeShowcases display the updated generated images",
-        "No broken image links are present"
+        "The email address 'all4funflorida@gmail.com' is displayed at the very bottom of the page footer",
+        "The email is rendered as a clickable mailto link",
+        "The link is accompanied by a short prompt such as 'Questions? Email us at' to provide context",
+        "The styling is consistent with the existing footer design"
       ]
     }
   ],
   "constraints": [
-    "Do not remove or alter the flowers and grass decorations in any resin memorial image",
-    "Black frame must appear around the animal portrait inside the resin mold, not around the entire product card",
-    "Do not modify files in frontend/src/hooks/ or frontend/src/components/ui"
+    "Do not modify any files under frontend/src/hooks/useInternetIdentity.ts or frontend/src/hooks/useActor.ts",
+    "Do not alter the Internet Identity authentication logic itself, only remove the UI button from the header",
+    "Preserve all existing order form fields and functionality"
   ],
   "nonGoals": [
-    "Adding a new resin shape or memorial product",
-    "Changing the overall page layout or branding",
-    "Modifying backend data models or order logic"
+    "Redesigning the overall header or footer layout beyond the specified changes",
+    "Adding additional contact methods (phone, social media) beyond the requested email",
+    "Changing the backend order schema beyond adding first/last name fields",
+    "Adding authentication flows or user profile features"
   ],
   "imageRequirements": {
-    "required": [
-      "Heart-shaped resin mold memorial with a cute cat portrait centered inside, surrounded by a bold black rectangular frame, with flowers and green grass botanical elements embedded in clear resin (whiskers-heart-memorial.dim_600x600.png)",
-      "Hexagon-shaped resin mold memorial with a colorful bird portrait centered inside, surrounded by a bold black rectangular frame, with flowers and green grass botanical elements embedded in clear resin (tweety-hexagon-memorial.dim_600x600.png)",
-      "Square-shaped resin mold memorial with a dog portrait centered inside, surrounded by a bold black rectangular frame, with flowers and green grass botanical elements embedded in clear resin (nabi-square-memorial.dim_600x600.png)"
-    ],
+    "required": [],
     "edits": []
   }
 }

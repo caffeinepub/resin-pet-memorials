@@ -10,6 +10,15 @@ import type { ActorMethod } from '@icp-sdk/core/agent';
 import type { IDL } from '@icp-sdk/core/candid';
 import type { Principal } from '@icp-sdk/core/principal';
 
+export interface Address {
+  'country' : string,
+  'city' : string,
+  'postalCode' : string,
+  'stateOrProvince' : string,
+  'addressLine2' : [] | [string],
+  'phoneNumber' : string,
+  'streetAddress' : string,
+}
 export interface Animal {
   'deathDate' : bigint,
   'birthDate' : bigint,
@@ -19,11 +28,24 @@ export interface Animal {
 export interface AstCloudOrder {
   'id' : bigint,
   'paymentStatus' : PaymentStatus,
+  'contactInfo' : ContactInfo,
   'paymentMethod' : PaymentMethod,
   'owner' : Principal,
   'animal' : Animal,
+  'headstoneDesign' : HeadstoneDesign,
+  'shippingAddress' : Address,
+  'buyerInfo' : BuyerInfo,
 }
+export interface BuyerInfo { 'lastName' : string, 'firstName' : string }
+export interface ContactInfo { 'email' : string, 'phoneNumber' : string }
 export type ExternalBlob = Uint8Array;
+export interface HeadstoneDesign {
+  'peninsulaFrame' : ExternalBlob,
+  'squareFrame' : ExternalBlob,
+  'ovalFrame' : ExternalBlob,
+  'headstoneFrame' : ExternalBlob,
+  'roundFrame' : ExternalBlob,
+}
 export type PaymentMethod = { 'stripe' : null } |
   { 'crypto' : null } |
   { 'paypal' : null };
@@ -98,13 +120,14 @@ export interface _SERVICE {
     string
   >,
   /**
+   * / Retrieves all headstone designs.
+   */
+  'getAllHeadstoneDesigns' : ActorMethod<[], Array<HeadstoneDesign>>,
+  /**
    * / Returns the current user's profile if they are a user.
    */
   'getCallerUserProfile' : ActorMethod<[], [] | [UserProfile]>,
   'getCallerUserRole' : ActorMethod<[], UserRole>,
-  /**
-   * / Retrieves orders for the caller.
-   */
   'getOrders' : ActorMethod<[], Array<AstCloudOrder>>,
   'getStripeSessionStatus' : ActorMethod<[string], StripeSessionStatus>,
   /**
@@ -118,11 +141,22 @@ export interface _SERVICE {
    */
   'saveCallerUserProfile' : ActorMethod<[UserProfile], undefined>,
   'setStripeConfiguration' : ActorMethod<[StripeConfiguration], undefined>,
-  /**
-   * / Submits an order for authenticated users.
-   */
   'submitOrder' : ActorMethod<
-    [string, bigint, bigint, PaymentMethod, ExternalBlob],
+    [
+      string,
+      bigint,
+      bigint,
+      PaymentMethod,
+      ExternalBlob,
+      ExternalBlob,
+      ExternalBlob,
+      ExternalBlob,
+      ExternalBlob,
+      ExternalBlob,
+      Address,
+      BuyerInfo,
+      ContactInfo,
+    ],
     bigint
   >,
   'transform' : ActorMethod<[TransformationInput], TransformationOutput>,

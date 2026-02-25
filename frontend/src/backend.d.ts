@@ -14,11 +14,27 @@ export class ExternalBlob {
     static fromBytes(blob: Uint8Array<ArrayBuffer>): ExternalBlob;
     withUploadProgress(onProgress: (percentage: number) => void): ExternalBlob;
 }
+export interface HeadstoneDesign {
+    peninsulaFrame: ExternalBlob;
+    squareFrame: ExternalBlob;
+    ovalFrame: ExternalBlob;
+    headstoneFrame: ExternalBlob;
+    roundFrame: ExternalBlob;
+}
 export interface Animal {
     deathDate: bigint;
     birthDate: bigint;
     name: string;
     photo?: ExternalBlob;
+}
+export interface Address {
+    country: string;
+    city: string;
+    postalCode: string;
+    stateOrProvince: string;
+    addressLine2?: string;
+    phoneNumber: string;
+    streetAddress: string;
 }
 export interface TransformationOutput {
     status: bigint;
@@ -28,9 +44,13 @@ export interface TransformationOutput {
 export interface AstCloudOrder {
     id: bigint;
     paymentStatus: PaymentStatus;
+    contactInfo: ContactInfo;
     paymentMethod: PaymentMethod;
     owner: Principal;
     animal: Animal;
+    headstoneDesign: HeadstoneDesign;
+    shippingAddress: Address;
+    buyerInfo: BuyerInfo;
 }
 export interface http_header {
     value: string;
@@ -51,6 +71,10 @@ export interface ShoppingItem {
 export interface TransformationInput {
     context: Uint8Array;
     response: http_request_result;
+}
+export interface BuyerInfo {
+    lastName: string;
+    firstName: string;
 }
 export type StripeSessionStatus = {
     __kind__: "completed";
@@ -78,6 +102,10 @@ export type PaymentStatus = {
     __kind__: "failed";
     failed: string;
 };
+export interface ContactInfo {
+    email: string;
+    phoneNumber: string;
+}
 export interface UserProfile {
     name: string;
     email: string;
@@ -96,13 +124,14 @@ export interface backendInterface {
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
     createCheckoutSession(items: Array<ShoppingItem>, successUrl: string, cancelUrl: string): Promise<string>;
     /**
+     * / Retrieves all headstone designs.
+     */
+    getAllHeadstoneDesigns(): Promise<Array<HeadstoneDesign>>;
+    /**
      * / Returns the current user's profile if they are a user.
      */
     getCallerUserProfile(): Promise<UserProfile | null>;
     getCallerUserRole(): Promise<UserRole>;
-    /**
-     * / Retrieves orders for the caller.
-     */
     getOrders(): Promise<Array<AstCloudOrder>>;
     getStripeSessionStatus(sessionId: string): Promise<StripeSessionStatus>;
     /**
@@ -116,9 +145,6 @@ export interface backendInterface {
      */
     saveCallerUserProfile(profile: UserProfile): Promise<void>;
     setStripeConfiguration(config: StripeConfiguration): Promise<void>;
-    /**
-     * / Submits an order for authenticated users.
-     */
-    submitOrder(name: string, birthDate: bigint, deathDate: bigint, paymentMethod: PaymentMethod, photo: ExternalBlob): Promise<bigint>;
+    submitOrder(animalName: string, birthDate: bigint, deathDate: bigint, paymentMethod: PaymentMethod, photo: ExternalBlob, peninsulaFrame: ExternalBlob, ovalFrame: ExternalBlob, squareFrame: ExternalBlob, roundFrame: ExternalBlob, headstoneFrame: ExternalBlob, shippingAddress: Address, buyerInfo: BuyerInfo, contactInfo: ContactInfo): Promise<bigint>;
     transform(input: TransformationInput): Promise<TransformationOutput>;
 }

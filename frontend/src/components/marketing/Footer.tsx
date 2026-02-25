@@ -1,9 +1,9 @@
-import { Heart } from 'lucide-react';
+import { Heart, Mail } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  const appIdentifier = typeof window !== 'undefined' 
-    ? encodeURIComponent(window.location.hostname) 
+  const appIdentifier = typeof window !== 'undefined'
+    ? encodeURIComponent(window.location.hostname)
     : 'furever-keepsakes-and-memorials';
 
   return (
@@ -82,6 +82,17 @@ export default function Footer() {
               caffeine.ai
             </a>
           </p>
+        </div>
+
+        <div className="mt-6 pt-6 border-t border-border/40 flex items-center justify-center gap-2 text-sm text-muted-foreground">
+          <Mail className="h-4 w-4 text-primary flex-shrink-0" />
+          <span>Questions? Email us at</span>
+          <a
+            href="mailto:all4funflorida@gmail.com"
+            className="text-foreground hover:text-primary transition-colors font-medium"
+          >
+            all4funflorida@gmail.com
+          </a>
         </div>
       </div>
     </footer>

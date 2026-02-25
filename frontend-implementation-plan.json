@@ -1,67 +1,55 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Add cat to heart memorial, bird to hexagon memorial, with black frames on all animal portraits",
+  "title": "Add name fields to order form, remove login button, add contact email to footer",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Generate a new heart-shaped resin memorial image that includes a cat portrait (replacing or updating the Whiskers memorial image), retaining the existing flowers and grass decorations, with a black frame border surrounding the cat's portrait within the resin mold",
+      "summary": "Add 'First Name' and 'Last Name' input fields to the order form before shipping address, make them required, and include them in the order submission payload",
       "acceptanceCriteria": [
-        "The heart-shaped resin memorial displays a visible cat portrait",
-        "The cat portrait has a black frame/border around it within the mold",
-        "Flowers and grass decorations remain visible in the heart mold image"
+        "A 'First Name' text input appears directly above the shipping address section in the order form",
+        "A 'Last Name' text input appears directly below 'First Name' and above the shipping address section",
+        "Both fields are required and show validation errors if left blank on submission",
+        "First and last name values are sent as part of the order submission data to the backend"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/marketing/Sections/ShapeShowcases.tsx",
+          "path": "frontend/src/components/order/OrderForm.tsx",
           "operation": "modify",
-          "description": "Update the heart memorial shape card to reference the newly generated heart memorial image at frontend/public/assets/generated/whiskers-heart-memorial.dim_600x600.png which includes a cat portrait with a black frame and preserved floral decorations"
+          "description": "Add firstName and lastName state variables to the OrderForm component. Insert two new input fields (First Name and Last Name) immediately before the shipping address section, using the same styling pattern as existing form inputs. Add required validation for both fields. Update the form submission handler to include firstName and lastName in the buyerInfo object when calling submitOrder. Ensure the inputs are properly labeled and accessible."
         }
       ]
     },
     {
       "id": "REQ-2",
-      "summary": "Generate a new hexagon-shaped resin memorial image that includes a bird portrait (replacing or updating the Tweety memorial image), retaining the existing flowers and grass decorations, with a black frame border surrounding the bird's portrait within the resin mold",
+      "summary": "Remove the Internet Identity login/logout button from the Header component so only logo and navigation links remain visible",
       "acceptanceCriteria": [
-        "The hexagon-shaped resin memorial displays a visible bird portrait",
-        "The bird portrait has a black frame/border around it within the mold",
-        "Flowers and grass decorations remain visible in the hexagon mold image"
+        "The login/logout button is no longer visible in the header on desktop or mobile",
+        "The mobile menu also does not contain a login/logout option",
+        "The header still displays the logo and navigation links correctly"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/marketing/Sections/ShapeShowcases.tsx",
+          "path": "frontend/src/components/marketing/Header.tsx",
           "operation": "modify",
-          "description": "Update the hexagon memorial shape card to reference the newly generated hexagon memorial image at frontend/public/assets/generated/tweety-hexagon-memorial.dim_600x600.png which includes a bird portrait with a black frame and preserved floral decorations"
+          "description": "Remove the Internet Identity login/logout button from both the desktop header and mobile menu. Delete the button element and any associated click handlers or authentication state references from the Header component. Ensure the remaining header layout (logo and navigation links) is properly styled and centered without the button. Do not modify the useInternetIdentity hook or any authentication logic files."
         }
       ]
     },
     {
       "id": "REQ-3",
-      "summary": "Update the square resin memorial image (Nabi) so the animal portrait also has a black frame border surrounding it within the resin mold, consistent with the framing applied to the heart and hexagon memorials",
+      "summary": "Add the contact email address 'all4funflorida@gmail.com' to the very bottom of the Footer component as a clickable mailto link with a descriptive label",
       "acceptanceCriteria": [
-        "The square resin memorial (Nabi) animal portrait is surrounded by a black frame within the mold",
-        "Existing flowers and grass decorations are preserved"
+        "The email address 'all4funflorida@gmail.com' is displayed at the very bottom of the page footer",
+        "The email is rendered as a clickable mailto link",
+        "The link is accompanied by a short prompt such as 'Questions? Email us at' to provide context",
+        "The styling is consistent with the existing footer design"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/marketing/Sections/ShapeShowcases.tsx",
+          "path": "frontend/src/components/marketing/Footer.tsx",
           "operation": "modify",
-          "description": "Update the square memorial shape card to reference the newly generated square memorial image at frontend/public/assets/generated/nabi-square-memorial.dim_600x600.png which includes a dog portrait with a black frame and preserved floral decorations"
-        }
-      ]
-    },
-    {
-      "id": "REQ-4",
-      "summary": "Update the ShapeShowcases component to render the newly generated heart, hexagon, and square memorial images from frontend/public/assets/generated, replacing any previously used image sources for these three memorials",
-      "acceptanceCriteria": [
-        "All three memorial shape cards in ShapeShowcases display the updated generated images",
-        "No broken image links are present"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/marketing/Sections/ShapeShowcases.tsx",
-          "operation": "modify",
-          "description": "Wire the three newly generated memorial images into the ShapeShowcases component by updating the src attributes for the square, heart, and hexagon shape cards to reference frontend/public/assets/generated/nabi-square-memorial.dim_600x600.png, frontend/public/assets/generated/whiskers-heart-memorial.dim_600x600.png, and frontend/public/assets/generated/tweety-hexagon-memorial.dim_600x600.png respectively, ensuring all images are displayed correctly without broken links"
+          "description": "Add a new section at the very bottom of the Footer component (below the existing copyright and attribution section). Insert a text prompt such as 'Questions? Email us at' followed by a clickable mailto link to 'all4funflorida@gmail.com'. Style the email link consistently with the existing footer design, using appropriate text colors and hover states. Ensure proper spacing between this new contact section and the existing footer content."
         }
       ]
     }

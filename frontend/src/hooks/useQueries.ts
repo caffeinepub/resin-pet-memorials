@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useActor } from './useActor';
-import { UserProfile, AstCloudOrder, PaymentMethod, ShoppingItem } from '../backend';
+import { UserProfile, AstCloudOrder, PaymentMethod, ShoppingItem, Address, ContactInfo, BuyerInfo } from '../backend';
 import { ExternalBlob } from '../backend';
 
 export function useGetCallerUserProfile() {
@@ -46,15 +46,45 @@ export function useSubmitOrder() {
       deathDate,
       paymentMethod,
       photo,
+      peninsulaFrame,
+      ovalFrame,
+      squareFrame,
+      roundFrame,
+      headstoneFrame,
+      shippingAddress,
+      buyerInfo,
+      contactInfo,
     }: {
       name: string;
       birthDate: bigint;
       deathDate: bigint;
       paymentMethod: PaymentMethod;
       photo: ExternalBlob;
+      peninsulaFrame: ExternalBlob;
+      ovalFrame: ExternalBlob;
+      squareFrame: ExternalBlob;
+      roundFrame: ExternalBlob;
+      headstoneFrame: ExternalBlob;
+      shippingAddress: Address;
+      buyerInfo: BuyerInfo;
+      contactInfo: ContactInfo;
     }) => {
       if (!actor) throw new Error('Actor not available');
-      return actor.submitOrder(name, birthDate, deathDate, paymentMethod, photo);
+      return actor.submitOrder(
+        name,
+        birthDate,
+        deathDate,
+        paymentMethod,
+        photo,
+        peninsulaFrame,
+        ovalFrame,
+        squareFrame,
+        roundFrame,
+        headstoneFrame,
+        shippingAddress,
+        buyerInfo,
+        contactInfo,
+      );
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['orders'] });

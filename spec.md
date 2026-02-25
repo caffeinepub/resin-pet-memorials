@@ -1,12 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Update the resin memorial shape showcases so the heart contains a cat portrait, the hexagon contains a bird portrait, and all three animal portraits (heart, hexagon, square) are surrounded by a bold black frame inside the resin mold.
+**Goal:** Add first/last name fields to the order form, remove the login button from the header, and add a contact email to the footer.
 
 **Planned changes:**
-- Generate a new heart-shaped resin memorial image featuring a cat portrait with a black frame, flowers, and grass decorations
-- Generate a new hexagon-shaped resin memorial image featuring a bird portrait with a black frame, flowers, and grass decorations
-- Generate a new square-shaped resin memorial image featuring a dog portrait with a black frame, flowers, and grass decorations
-- Update the ShapeShowcases component to display the three newly generated memorial images
+- Add required "First Name" and "Last Name" input fields to the order form, positioned immediately before the shipping address fields, and include them in the order submission payload
+- Remove the login/logout button from the header (both desktop and mobile menu)
+- Add a clickable mailto link for `all4funflorida@gmail.com` at the bottom of the footer with a short prompt like "Questions? Email us at all4funflorida@gmail.com"
 
-**User-visible outcome:** The three resin memorial shape cards on the site display updated images — a cat in the heart, a bird in the hexagon, and a dog in the square — each with a visible black frame around the animal portrait inside the mold.
+**User-visible outcome:** Customers filling out the order form will provide their first and last name before the shipping address, the header no longer shows a login button, and visitors can easily find and click the contact email at the bottom of every page.

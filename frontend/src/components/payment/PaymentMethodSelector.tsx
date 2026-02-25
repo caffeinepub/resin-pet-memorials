@@ -1,7 +1,7 @@
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { PaymentMethod } from '../../backend';
-import { CreditCard, Wallet, Bitcoin } from 'lucide-react';
+import { CreditCard, Wallet } from 'lucide-react';
 
 interface PaymentMethodSelectorProps {
   value: PaymentMethod;
@@ -21,12 +21,6 @@ export default function PaymentMethodSelector({ value, onChange }: PaymentMethod
       label: 'PayPal',
       description: 'Pay with your PayPal account',
       icon: Wallet,
-    },
-    {
-      value: PaymentMethod.crypto,
-      label: 'Cryptocurrency',
-      description: 'Pay with Bitcoin or other crypto',
-      icon: Bitcoin,
     },
   ];
 

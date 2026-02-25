@@ -1,41 +1,35 @@
 {
   "schemaVersion": "1.0.0",
   "projectStateVersion": 3,
-  "summary": "Pet memorial website (Furever Keepsakes and Memorials) featuring resin memorial products with animal portraits. Currently has three resin shapes: square (Nabi), heart (Whiskers), and hexagon (Tweety), each with flowers and grass decorations.",
-  "architectural_notes": [],
+  "summary": "Simple order form and payment method website. No login button. Order form includes first/last name before shipping address fields, contact info (phone + email), and payment method. Contact email all4funflorida@gmail.com displayed at the bottom of the page.",
+  "architectural_notes": [
+    "Simple order form site — no authentication or login required",
+    "Order form field order: First Name, Last Name, Shipping Address, Contact Info (phone + email), Payment Method"
+  ],
   "known_issues": [],
   "isFixRequest": false,
-  "imageRequirements": "## Required Images\n- Heart-shaped resin mold memorial with a cute cat portrait centered inside, surrounded by a bold black rectangular frame, with flowers and green grass botanical elements embedded in clear resin (whiskers-heart-memorial.dim_600x600.png)\n- Hexagon-shaped resin mold memorial with a colorful bird portrait centered inside, surrounded by a bold black rectangular frame, with flowers and green grass botanical elements embedded in clear resin (tweety-hexagon-memorial.dim_600x600.png)\n- Square-shaped resin mold memorial with a dog portrait centered inside, surrounded by a bold black rectangular frame, with flowers and green grass botanical elements embedded in clear resin (nabi-square-memorial.dim_600x600.png)",
   "existing_features": [
     {
-      "id": "feature-generate-a-new-heart-shaped-resin-memorial-image-that-includes-a-cat-portrait-replacing-or-updating-the-whiskers-memorial-image-retaining-the-existing-flowers-and-grass-decorations-with-a-black-frame-border-surrounding-the-cat-s-portrait-within-the-resin-mold",
-      "title": "Generate a new heart-shaped resin memorial image that includes a cat portrait (replacing or updating the Whiskers memorial image), retaining the existing flowers and grass decorations, with a black frame border surrounding the cat's portrait within the resin mold.",
+      "id": "feature-add-first-name-and-last-name-input-fields-to-the-order-form-in-orderform-tsx-positioned-immediately-before-the-shipping-address-fields-both-fields-should-be-required-and-their-values-should-be-included-in-the-order-submission-payload",
+      "title": "Add 'First Name' and 'Last Name' input fields to the order form in OrderForm.tsx, positioned immediately before the shipping address fields. Both fields should be required and their values should be included in the order submission payload.",
       "reqIds": [
         "REQ-1"
       ],
       "version": 1
     },
     {
-      "id": "feature-generate-a-new-hexagon-shaped-resin-memorial-image-that-includes-a-bird-portrait-replacing-or-updating-the-tweety-memorial-image-retaining-the-existing-flowers-and-grass-decorations-with-a-black-frame-border-surrounding-the-bird-s-portrait-within-the-resin-mold",
-      "title": "Generate a new hexagon-shaped resin memorial image that includes a bird portrait (replacing or updating the Tweety memorial image), retaining the existing flowers and grass decorations, with a black frame border surrounding the bird's portrait within the resin mold.",
+      "id": "feature-remove-the-internet-identity-login-logout-button-from-the-header-component-frontend-src-components-marketing-header-tsx-so-that-the-sticky-header-contains-only-the-logo-and-navigation-links-with-no-authentication-controls-visible",
+      "title": "Remove the Internet Identity login/logout button from the Header component (frontend/src/components/marketing/Header.tsx) so that the sticky header contains only the logo and navigation links, with no authentication controls visible.",
       "reqIds": [
         "REQ-2"
       ],
       "version": 1
     },
     {
-      "id": "feature-update-the-square-resin-memorial-image-nabi-so-the-animal-portrait-also-has-a-black-frame-border-surrounding-it-within-the-resin-mold-consistent-with-the-framing-applied-to-the-heart-and-hexagon-memorials",
-      "title": "Update the square resin memorial image (Nabi) so the animal portrait also has a black frame border surrounding it within the resin mold, consistent with the framing applied to the heart and hexagon memorials.",
+      "id": "feature-add-the-contact-email-address-all4funflorida-gmail-com-to-the-very-bottom-of-the-website-in-the-footer-component-frontend-src-components-marketing-footer-tsx-presented-as-a-clickable-mailto-link-with-a-label-such-as-questions-email-us-at-all4funflorida-gmail-com",
+      "title": "Add the contact email address 'all4funflorida@gmail.com' to the very bottom of the website in the Footer component (frontend/src/components/marketing/Footer.tsx), presented as a clickable mailto link with a label such as 'Questions? Email us at all4funflorida@gmail.com'.",
       "reqIds": [
         "REQ-3"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-update-the-shapeshowcases-component-to-render-the-newly-generated-heart-hexagon-and-square-memorial-images-from-frontend-public-assets-generated-replacing-any-previously-used-image-sources-for-these-three-memorials",
-      "title": "Update the ShapeShowcases component to render the newly generated heart, hexagon, and square memorial images from frontend/public/assets/generated, replacing any previously used image sources for these three memorials.",
-      "reqIds": [
-        "REQ-4"
       ],
       "version": 1
     }
@@ -43,25 +37,25 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Add cat picture in heart shape resin memorial with black frame around the animal image",
+      "summary": "Add first and last name fields before shipping address in order form",
       "reqIds": [],
       "status": "pending"
     },
     {
       "id": "AR-2",
-      "summary": "Add bird picture in hexagon shape resin memorial with black frame around the animal image",
+      "summary": "Remove login button from the top of the page",
       "reqIds": [],
       "status": "pending"
     },
     {
       "id": "AR-3",
-      "summary": "Surround all animal pictures within resin molds with a black frame",
+      "summary": "Add contact email all4funflorida@gmail.com at the very bottom of the website",
       "reqIds": [],
       "status": "pending"
     }
   ],
   "gameProjectType": "none",
-  "projectName": "Furever Keepsakes and Memorials",
+  "projectName": "All4Fun Florida Order Form",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

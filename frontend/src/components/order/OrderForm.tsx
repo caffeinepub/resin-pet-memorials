@@ -5,10 +5,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Separator } from '@/components/ui/separator';
 import { useSubmitOrder } from '../../hooks/useQueries';
 import { ExternalBlob, PaymentMethod } from '../../backend';
 import { useInternetIdentity } from '../../hooks/useInternetIdentity';
-import { Upload, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Upload, CheckCircle2, AlertCircle, MapPin, Phone, User } from 'lucide-react';
 import PaymentMethodSelector from '../payment/PaymentMethodSelector';
 
 type OrderFormData = {
@@ -16,12 +17,31 @@ type OrderFormData = {
   birthDate: string;
   deathDate: string;
   photo: FileList;
+  // Buyer name
+  firstName: string;
+  lastName: string;
+  // Contact info
+  email: string;
+  phoneNumber: string;
+  // Shipping address
+  streetAddress: string;
+  addressLine2: string;
+  city: string;
+  stateOrProvince: string;
+  postalCode: string;
+  country: string;
 };
 
 export default function OrderForm() {
   const { identity, login } = useInternetIdentity();
   const isAuthenticated = !!identity && !identity.getPrincipal().isAnonymous();
-  const { register, handleSubmit, formState: { errors }, watch, reset } = useForm<OrderFormData>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+    reset,
+  } = useForm<OrderFormData>();
   const submitOrder = useSubmitOrder();
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(PaymentMethod.stripe);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
@@ -61,6 +81,9 @@ export default function OrderForm() {
         setUploadProgress(percentage);
       });
 
+      // Use the same photo blob as placeholder for all frame slots
+      const frameBlob = ExternalBlob.fromBytes(bytes);
+
       const birthDate = BigInt(new Date(data.birthDate).getTime());
       const deathDate = BigInt(new Date(data.deathDate).getTime());
 
@@ -70,6 +93,28 @@ export default function OrderForm() {
         deathDate,
         paymentMethod,
         photo: externalBlob,
+        peninsulaFrame: frameBlob,
+        ovalFrame: frameBlob,
+        squareFrame: frameBlob,
+        roundFrame: frameBlob,
+        headstoneFrame: frameBlob,
+        shippingAddress: {
+          streetAddress: data.streetAddress,
+          addressLine2: data.addressLine2 ? data.addressLine2 : undefined,
+          city: data.city,
+          stateOrProvince: data.stateOrProvince,
+          postalCode: data.postalCode,
+          country: data.country,
+          phoneNumber: data.phoneNumber,
+        },
+        buyerInfo: {
+          firstName: data.firstName,
+          lastName: data.lastName,
+        },
+        contactInfo: {
+          email: data.email,
+          phoneNumber: data.phoneNumber,
+        },
       });
 
       setSubmitSuccess(true);
@@ -102,6 +147,7 @@ export default function OrderForm() {
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+              {/* Pet Details */}
               <div className="space-y-2">
                 <Label htmlFor="animalName">Pet's Name *</Label>
                 <Input
@@ -188,6 +234,193 @@ export default function OrderForm() {
                 )}
               </div>
 
+              <Separator />
+
+              {/* Contact Information */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-2">
+                  <Phone className="h-5 w-5 text-primary" />
+                  <h3 className="font-serif text-lg font-semibold text-foreground">
+                    Contact Information
+                  </h3>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  We'll use these details to keep you updated on your order.
+                </p>
+
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Email Address *</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      {...register('email', {
+                        required: 'Email address is required',
+                        pattern: {
+                          value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                          message: 'Please enter a valid email address',
+                        },
+                      })}
+                      placeholder="you@example.com"
+                      className={errors.email ? 'border-destructive' : ''}
+                    />
+                    {errors.email && (
+                      <p className="text-sm text-destructive">{errors.email.message}</p>
+                    )}
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="phoneNumber">Phone Number *</Label>
+                    <Input
+                      id="phoneNumber"
+                      type="tel"
+                      {...register('phoneNumber', {
+                        required: 'Phone number is required',
+                        minLength: { value: 1, message: 'Phone number is required' },
+                      })}
+                      placeholder="+1 (555) 000-0000"
+                      className={errors.phoneNumber ? 'border-destructive' : ''}
+                    />
+                    {errors.phoneNumber && (
+                      <p className="text-sm text-destructive">{errors.phoneNumber.message}</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <Separator />
+
+              {/* Ship To — Name + Address */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-2">
+                  <MapPin className="h-5 w-5 text-primary" />
+                  <h3 className="font-serif text-lg font-semibold text-foreground">
+                    Ship To
+                  </h3>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  Enter the name and address where you'd like your Furever Keepsake delivered.
+                </p>
+
+                {/* Recipient Name */}
+                <div className="flex items-center gap-2 mb-1">
+                  <User className="h-4 w-4 text-muted-foreground" />
+                  <span className="text-sm font-medium text-foreground">Recipient Name</span>
+                </div>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="firstName">First Name *</Label>
+                    <Input
+                      id="firstName"
+                      {...register('firstName', { required: 'First name is required' })}
+                      placeholder="Jane"
+                      className={errors.firstName ? 'border-destructive' : ''}
+                    />
+                    {errors.firstName && (
+                      <p className="text-sm text-destructive">{errors.firstName.message}</p>
+                    )}
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="lastName">Last Name *</Label>
+                    <Input
+                      id="lastName"
+                      {...register('lastName', { required: 'Last name is required' })}
+                      placeholder="Smith"
+                      className={errors.lastName ? 'border-destructive' : ''}
+                    />
+                    {errors.lastName && (
+                      <p className="text-sm text-destructive">{errors.lastName.message}</p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Street Address */}
+                <div className="space-y-2">
+                  <Label htmlFor="streetAddress">Street Address *</Label>
+                  <Input
+                    id="streetAddress"
+                    {...register('streetAddress', { required: 'Street address is required' })}
+                    placeholder="123 Main Street"
+                    className={errors.streetAddress ? 'border-destructive' : ''}
+                  />
+                  {errors.streetAddress && (
+                    <p className="text-sm text-destructive">{errors.streetAddress.message}</p>
+                  )}
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="addressLine2">
+                    Address Line 2{' '}
+                    <span className="text-muted-foreground font-normal">(optional)</span>
+                  </Label>
+                  <Input
+                    id="addressLine2"
+                    {...register('addressLine2')}
+                    placeholder="Apt, suite, unit, building, floor, etc."
+                  />
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="city">City *</Label>
+                    <Input
+                      id="city"
+                      {...register('city', { required: 'City is required' })}
+                      placeholder="City"
+                      className={errors.city ? 'border-destructive' : ''}
+                    />
+                    {errors.city && (
+                      <p className="text-sm text-destructive">{errors.city.message}</p>
+                    )}
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="stateOrProvince">State / Province *</Label>
+                    <Input
+                      id="stateOrProvince"
+                      {...register('stateOrProvince', { required: 'State or province is required' })}
+                      placeholder="State or Province"
+                      className={errors.stateOrProvince ? 'border-destructive' : ''}
+                    />
+                    {errors.stateOrProvince && (
+                      <p className="text-sm text-destructive">{errors.stateOrProvince.message}</p>
+                    )}
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="postalCode">Postal Code *</Label>
+                    <Input
+                      id="postalCode"
+                      {...register('postalCode', { required: 'Postal code is required' })}
+                      placeholder="12345"
+                      className={errors.postalCode ? 'border-destructive' : ''}
+                    />
+                    {errors.postalCode && (
+                      <p className="text-sm text-destructive">{errors.postalCode.message}</p>
+                    )}
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="country">Country *</Label>
+                    <Input
+                      id="country"
+                      {...register('country', { required: 'Country is required' })}
+                      placeholder="United States"
+                      className={errors.country ? 'border-destructive' : ''}
+                    />
+                    {errors.country && (
+                      <p className="text-sm text-destructive">{errors.country.message}</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <Separator />
+
+              {/* Payment Method */}
               <div className="space-y-2">
                 <Label>Payment Method *</Label>
                 <PaymentMethodSelector

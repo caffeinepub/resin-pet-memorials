@@ -31,6 +31,14 @@ export const ShoppingItem = IDL.Record({
   'priceInCents' : IDL.Nat,
   'productDescription' : IDL.Text,
 });
+export const ExternalBlob = IDL.Vec(IDL.Nat8);
+export const HeadstoneDesign = IDL.Record({
+  'peninsulaFrame' : ExternalBlob,
+  'squareFrame' : ExternalBlob,
+  'ovalFrame' : ExternalBlob,
+  'headstoneFrame' : ExternalBlob,
+  'roundFrame' : ExternalBlob,
+});
 export const UserProfile = IDL.Record({
   'name' : IDL.Text,
   'email' : IDL.Text,
@@ -40,24 +48,44 @@ export const PaymentStatus = IDL.Variant({
   'completed' : IDL.Text,
   'failed' : IDL.Text,
 });
+export const ContactInfo = IDL.Record({
+  'email' : IDL.Text,
+  'phoneNumber' : IDL.Text,
+});
 export const PaymentMethod = IDL.Variant({
   'stripe' : IDL.Null,
   'crypto' : IDL.Null,
   'paypal' : IDL.Null,
 });
-export const ExternalBlob = IDL.Vec(IDL.Nat8);
 export const Animal = IDL.Record({
   'deathDate' : IDL.Nat,
   'birthDate' : IDL.Nat,
   'name' : IDL.Text,
   'photo' : IDL.Opt(ExternalBlob),
 });
+export const Address = IDL.Record({
+  'country' : IDL.Text,
+  'city' : IDL.Text,
+  'postalCode' : IDL.Text,
+  'stateOrProvince' : IDL.Text,
+  'addressLine2' : IDL.Opt(IDL.Text),
+  'phoneNumber' : IDL.Text,
+  'streetAddress' : IDL.Text,
+});
+export const BuyerInfo = IDL.Record({
+  'lastName' : IDL.Text,
+  'firstName' : IDL.Text,
+});
 export const AstCloudOrder = IDL.Record({
   'id' : IDL.Nat,
   'paymentStatus' : PaymentStatus,
+  'contactInfo' : ContactInfo,
   'paymentMethod' : PaymentMethod,
   'owner' : IDL.Principal,
   'animal' : Animal,
+  'headstoneDesign' : HeadstoneDesign,
+  'shippingAddress' : Address,
+  'buyerInfo' : BuyerInfo,
 });
 export const StripeSessionStatus = IDL.Variant({
   'completed' : IDL.Record({
@@ -123,6 +151,11 @@ export const idlService = IDL.Service({
       [IDL.Text],
       [],
     ),
+  'getAllHeadstoneDesigns' : IDL.Func(
+      [],
+      [IDL.Vec(HeadstoneDesign)],
+      ['query'],
+    ),
   'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
   'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
   'getOrders' : IDL.Func([], [IDL.Vec(AstCloudOrder)], ['query']),
@@ -137,7 +170,21 @@ export const idlService = IDL.Service({
   'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
   'setStripeConfiguration' : IDL.Func([StripeConfiguration], [], []),
   'submitOrder' : IDL.Func(
-      [IDL.Text, IDL.Nat, IDL.Nat, PaymentMethod, ExternalBlob],
+      [
+        IDL.Text,
+        IDL.Nat,
+        IDL.Nat,
+        PaymentMethod,
+        ExternalBlob,
+        ExternalBlob,
+        ExternalBlob,
+        ExternalBlob,
+        ExternalBlob,
+        ExternalBlob,
+        Address,
+        BuyerInfo,
+        ContactInfo,
+      ],
       [IDL.Nat],
       [],
     ),
@@ -174,30 +221,58 @@ export const idlFactory = ({ IDL }) => {
     'priceInCents' : IDL.Nat,
     'productDescription' : IDL.Text,
   });
+  const ExternalBlob = IDL.Vec(IDL.Nat8);
+  const HeadstoneDesign = IDL.Record({
+    'peninsulaFrame' : ExternalBlob,
+    'squareFrame' : ExternalBlob,
+    'ovalFrame' : ExternalBlob,
+    'headstoneFrame' : ExternalBlob,
+    'roundFrame' : ExternalBlob,
+  });
   const UserProfile = IDL.Record({ 'name' : IDL.Text, 'email' : IDL.Text });
   const PaymentStatus = IDL.Variant({
     'pending' : IDL.Null,
     'completed' : IDL.Text,
     'failed' : IDL.Text,
   });
+  const ContactInfo = IDL.Record({
+    'email' : IDL.Text,
+    'phoneNumber' : IDL.Text,
+  });
   const PaymentMethod = IDL.Variant({
     'stripe' : IDL.Null,
     'crypto' : IDL.Null,
     'paypal' : IDL.Null,
   });
-  const ExternalBlob = IDL.Vec(IDL.Nat8);
   const Animal = IDL.Record({
     'deathDate' : IDL.Nat,
     'birthDate' : IDL.Nat,
     'name' : IDL.Text,
     'photo' : IDL.Opt(ExternalBlob),
   });
+  const Address = IDL.Record({
+    'country' : IDL.Text,
+    'city' : IDL.Text,
+    'postalCode' : IDL.Text,
+    'stateOrProvince' : IDL.Text,
+    'addressLine2' : IDL.Opt(IDL.Text),
+    'phoneNumber' : IDL.Text,
+    'streetAddress' : IDL.Text,
+  });
+  const BuyerInfo = IDL.Record({
+    'lastName' : IDL.Text,
+    'firstName' : IDL.Text,
+  });
   const AstCloudOrder = IDL.Record({
     'id' : IDL.Nat,
     'paymentStatus' : PaymentStatus,
+    'contactInfo' : ContactInfo,
     'paymentMethod' : PaymentMethod,
     'owner' : IDL.Principal,
     'animal' : Animal,
+    'headstoneDesign' : HeadstoneDesign,
+    'shippingAddress' : Address,
+    'buyerInfo' : BuyerInfo,
   });
   const StripeSessionStatus = IDL.Variant({
     'completed' : IDL.Record({
@@ -260,6 +335,11 @@ export const idlFactory = ({ IDL }) => {
         [IDL.Text],
         [],
       ),
+    'getAllHeadstoneDesigns' : IDL.Func(
+        [],
+        [IDL.Vec(HeadstoneDesign)],
+        ['query'],
+      ),
     'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
     'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
     'getOrders' : IDL.Func([], [IDL.Vec(AstCloudOrder)], ['query']),
@@ -274,7 +354,21 @@ export const idlFactory = ({ IDL }) => {
     'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
     'setStripeConfiguration' : IDL.Func([StripeConfiguration], [], []),
     'submitOrder' : IDL.Func(
-        [IDL.Text, IDL.Nat, IDL.Nat, PaymentMethod, ExternalBlob],
+        [
+          IDL.Text,
+          IDL.Nat,
+          IDL.Nat,
+          PaymentMethod,
+          ExternalBlob,
+          ExternalBlob,
+          ExternalBlob,
+          ExternalBlob,
+          ExternalBlob,
+          ExternalBlob,
+          Address,
+          BuyerInfo,
+          ContactInfo,
+        ],
         [IDL.Nat],
         [],
       ),

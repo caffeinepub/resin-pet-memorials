@@ -1,34 +1,8 @@
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
 import { Heart, Menu, X } from 'lucide-react';
-import { useInternetIdentity } from '../../hooks/useInternetIdentity';
-import { useQueryClient } from '@tanstack/react-query';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { login, clear, loginStatus, identity } = useInternetIdentity();
-  const queryClient = useQueryClient();
-
-  const isAuthenticated = !!identity && !identity.getPrincipal().isAnonymous();
-  const disabled = loginStatus === 'logging-in';
-  const buttonText = loginStatus === 'logging-in' ? 'Logging in...' : isAuthenticated ? 'Logout' : 'Login';
-
-  const handleAuth = async () => {
-    if (isAuthenticated) {
-      await clear();
-      queryClient.clear();
-    } else {
-      try {
-        await login();
-      } catch (error: any) {
-        console.error('Login error:', error);
-        if (error.message === 'User is already authenticated') {
-          await clear();
-          setTimeout(() => login(), 300);
-        }
-      }
-    }
-  };
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -66,14 +40,6 @@ export default function Header() {
               {link.label}
             </button>
           ))}
-          <Button
-            onClick={handleAuth}
-            disabled={disabled}
-            variant={isAuthenticated ? 'outline' : 'default'}
-            size="sm"
-          >
-            {buttonText}
-          </Button>
         </nav>
 
         <button
@@ -97,15 +63,6 @@ export default function Header() {
                 {link.label}
               </button>
             ))}
-            <Button
-              onClick={handleAuth}
-              disabled={disabled}
-              variant={isAuthenticated ? 'outline' : 'default'}
-              size="sm"
-              className="w-full"
-            >
-              {buttonText}
-            </Button>
           </nav>
         </div>
       )}
