@@ -1,38 +1,89 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Generate clear resin headstone mold image with flowers, grass, and Yorkie portrait for Ponce",
+  "title": "Admin image upload panel for all image-accepting areas",
   "requirements": [
     {
-      "id": "REQ-1",
-      "summary": "Generate a new headstone mold product image showing a clear resin headstone shape with flowers and green grass elements embedded inside, and a male Yorkie dog portrait displayed inside a black square frame centered on the headstone",
+      "id": "REQ-2",
+      "summary": "Create an admin-only 'Image Manager' panel in the frontend that lists every image slot with its current image preview and a file-picker upload button",
       "acceptanceCriteria": [
-        "The headstone mold image depicts a clear/transparent resin headstone shape",
-        "Flowers and green grass are visibly embedded within the resin",
-        "A male Yorkie dog portrait is centered on the headstone inside a solid black square frame",
-        "The image is used in the Headstone card within ShapeShowcases.tsx"
+        "Admin Image Manager panel is only visible/accessible to authenticated admin users.",
+        "All image slots are listed with their slot key label and current preview image.",
+        "Each slot has a 'Replace Image' file picker that accepts common image formats (jpg, png, webp, gif).",
+        "After upload, the slot preview updates to show the newly uploaded image without a full page reload.",
+        "Upload progress or loading state is shown while the blob is being sent to the backend.",
+        "Non-admin users cannot access or see the Image Manager panel."
       ],
       "file_operations": [
         {
-          "path": "frontend/public/assets/generated/ponce-headstone-mold.dim_800x900.png",
+          "path": "frontend/src/components/admin/ImageManager.tsx",
           "operation": "create",
-          "description": "Generate a photorealistic product image of a clear transparent resin headstone mold with colorful embedded flowers (roses, daisies) and green grass blades, featuring a centered male Yorkshire Terrier (Yorkie) dog portrait inside a solid black square frame on the face of the headstone. The image must be 800x900 pixels and saved at this exact workspace path for use as a static asset in the ShapeShowcases component."
+          "description": "Create an admin-only Image Manager component that lists all image slots (hero, shape-square, shape-heart, shape-hexagon, shape-headstone, about-resin, order-photo-preview) with their current preview images and file upload buttons. Use the blob-storage component to handle ExternalBlob uploads with progress tracking. Each slot displays its key label, current image preview (fetched via useImageSlot hook), and a file picker that calls useUploadImage mutation on selection. Show upload progress using the blob-storage component's withUploadProgress capability. Guard the component with an admin check using isCallerAdmin from the authorization component. Verify the blob-storage component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/admin/ImageSlotCard.tsx",
+          "operation": "create",
+          "description": "Create a reusable ImageSlotCard component that renders a single image slot with its label, current preview image (or placeholder), and a file input button. Display upload progress when uploading. Accept props for slotKey, currentImageUrl, onUpload callback, and isUploading state."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire the ImageManager component into the app by adding it to the admin area or creating a protected /admin/images route. Ensure the route is only accessible to authenticated admin users by checking isCallerAdmin. Add navigation link to the Image Manager from the existing admin interface or header when user is admin."
         }
       ]
     },
     {
-      "id": "REQ-2",
-      "summary": "Update the Headstone shape card in ShapeShowcases.tsx to render the newly generated clear resin headstone mold image as its showcase photo",
+      "id": "REQ-3",
+      "summary": "Update Hero.tsx, ShapeShowcases.tsx, and AboutResin.tsx to fetch their respective image slots from the backend and render custom images when available",
       "acceptanceCriteria": [
-        "The Headstone card in ShapeShowcases.tsx displays the new ponce-headstone-mold image",
-        "The image loads from frontend/public/assets/generated/ponce-headstone-mold.dim_800x900.png",
-        "No other shape cards are affected"
+        "Hero section product image uses the 'hero' slot from the backend if available.",
+        "Each ShapeShowcases card (Square, Heart, Hexagon, Headstone) uses its respective backend slot image if available.",
+        "AboutResin section uses the 'about-resin' slot from the backend if available.",
+        "All sections fall back to their existing static assets when no custom image has been uploaded for that slot.",
+        "Image fetching does not block page render; images load asynchronously."
       ],
       "file_operations": [
         {
+          "path": "frontend/src/components/marketing/Sections/Hero.tsx",
+          "operation": "modify",
+          "description": "Update Hero component to use the useImageSlot('hero') hook to fetch a custom hero image from the backend. If a custom image URL is returned, render it in place of the current static hero image (frontend/public/assets/generated/hero-resin-memorial.dim_1600x900.png). If no custom image exists (hook returns undefined), fall back to the existing static asset. Load the image asynchronously without blocking the initial render."
+        },
+        {
           "path": "frontend/src/components/marketing/Sections/ShapeShowcases.tsx",
           "operation": "modify",
-          "description": "Update the Headstone shape card image source to reference the newly generated ponce-headstone-mold.dim_800x900.png file. Change the image path for the Headstone card only, using the workspace path frontend/public/assets/generated/ponce-headstone-mold.dim_800x900.png. Keep all other shape cards (Square, Heart, Hexagon) unchanged. Ensure the image renders properly with appropriate alt text describing the clear resin headstone with flowers, grass, and Yorkie portrait."
+          "description": "Update ShapeShowcases component to use useImageSlot hook for each shape slot: 'shape-square', 'shape-heart', 'shape-hexagon', 'shape-headstone'. For each card, check if a custom image exists for its slot; if so, render the custom image, otherwise fall back to the existing static assets (shape-square.dim_1200x1200.png, shape-heart.dim_1200x1200.png, shape-hexagon.dim_1200x1200.png, shape-headstone-dog.dim_1200x1200.png). Load images asynchronously."
+        },
+        {
+          "path": "frontend/src/components/marketing/Sections/AboutResin.tsx",
+          "operation": "modify",
+          "description": "Update AboutResin component to use useImageSlot('about-resin') hook to fetch a custom about-resin image from the backend. If a custom image URL is returned, render it in the feature cards section. If no custom image exists, fall back to existing static presentation. Load the image asynchronously without blocking render."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Add React Query hooks for fetching image slots and uploading images using the blob-storage component",
+      "acceptanceCriteria": [
+        "useImageSlot(key) returns a data URL or object URL when a custom image is stored for that key, or undefined when none exists.",
+        "useUploadImage mutation accepts a slot key, File object, and mime type, encodes it as a blob, and calls the backend.",
+        "Both hooks are defined in the frontend/src/hooks/ directory following existing hook conventions.",
+        "Query cache is invalidated for the affected slot after a successful upload."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useImageSlot.ts",
+          "operation": "create",
+          "description": "Create a useImageSlot(key: string) React Query hook that calls getBlobByKey(key) from the backend. If a BlobSlot is returned, use the blob-storage component's ExternalBlob.getDirectURL() method to return a direct URL for the image. If null is returned, return undefined. Cache the result with queryKey ['imageSlot', key]. Use the useActor hook to access the backend actor. Verify the blob-storage component's usage instructions before implementing, specifically how to work with ExternalBlob objects returned from the backend."
+        },
+        {
+          "path": "frontend/src/hooks/useUploadImage.ts",
+          "operation": "create",
+          "description": "Create a useUploadImage mutation hook that accepts { key: string, file: File, name: string } as input. Use the blob-storage component's ExternalBlob.fromBytes() to create an ExternalBlob from the file's ArrayBuffer, then call actor.uploadBlob(key, blob, name). Support upload progress tracking using blob.withUploadProgress((percentage) => ...). On success, invalidate the query cache for ['imageSlot', key] and ['imageSlots'] to refresh the UI. Return the mutation with progress state. Verify the blob-storage component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useQueries.ts",
+          "operation": "modify",
+          "description": "Add a useListImageSlots hook that calls actor.listBlobs() and returns an array of all BlobSlot objects. Cache the result with queryKey ['imageSlots']. This hook will be used by the ImageManager to display all currently uploaded slots."
         }
       ]
     }

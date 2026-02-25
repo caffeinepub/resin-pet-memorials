@@ -1,60 +1,103 @@
 {
   "kind": "build_request",
-  "title": "Generate clear resin headstone mold image with flowers, grass, and Yorkie portrait for Ponce",
+  "title": "Admin image upload panel for all image-accepting areas",
   "projectName": "Furever Keepsakes",
   "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Generate a new headstone mold product image showing a clear resin headstone shape with flowers and green grass elements embedded inside, and a male Yorkie dog portrait displayed inside a black square frame centered on the headstone. This image should replace or be used as the Headstone shape showcase image in ShapeShowcases.tsx.",
-      "target": "frontend",
+      "text": "Extend the backend actor to store named image blobs with associated slot keys (e.g. 'hero', 'shape-square', 'shape-heart', 'shape-hexagon', 'shape-headstone', 'about-resin') using stable storage. Provide upload, retrieve-by-key, and list endpoints. Uploaded blobs replace the default static asset for that slot.",
+      "target": "backend",
       "source": {
         "messageIds": [
-          "msg-latest"
+          "msg-7"
         ],
         "quotes": [
-          "make a clear resin headstone mold with flowers, grass, and a picture of a male yorkie inside a black square frame to put for Ponce headstone picture"
+          "create an image upload area in the backend where I can upload my own photos in all the areas that takes an image"
         ]
       },
       "acceptanceCriteria": [
-        "The headstone mold image depicts a clear/transparent resin headstone shape",
-        "Flowers and green grass are visibly embedded within the resin",
-        "A male Yorkie dog portrait is centered on the headstone inside a solid black square frame",
-        "The image is used in the Headstone card within ShapeShowcases.tsx"
+        "Backend exposes an uploadImage(key: Text, data: Blob, mimeType: Text) endpoint restricted to admin callers.",
+        "Backend exposes a getImage(key: Text) endpoint returning the stored blob and mime type.",
+        "Backend exposes a listImageKeys() endpoint returning all currently stored slot keys.",
+        "Uploaded images persist across canister upgrades via stable storage.",
+        "Only authorized admin callers can call uploadImage."
       ]
     },
     {
       "id": "REQ-2",
-      "text": "Update the Headstone shape card in ShapeShowcases.tsx to render the newly generated clear resin headstone mold image (ponce-headstone-mold.dim_800x900.png) as its showcase photo.",
+      "text": "Create an admin-only 'Image Manager' panel in the frontend (accessible from the existing admin area or via a protected route) that lists every image slot (hero, shape-square, shape-heart, shape-hexagon, shape-headstone, about-resin, order-photo-preview) with its current image preview and a file-picker upload button. Uploading a new file for a slot calls the backend uploadImage endpoint and refreshes the displayed preview.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-latest"
+          "msg-7"
         ],
         "quotes": [
-          "to put for Ponce headstone picture"
+          "create an image upload area in the backend where I can upload my own photos in all the areas that takes an image"
         ]
       },
       "acceptanceCriteria": [
-        "The Headstone card in ShapeShowcases.tsx displays the new ponce-headstone-mold image",
-        "The image loads from frontend/public/assets/generated/ponce-headstone-mold.dim_800x900.png",
-        "No other shape cards are affected"
+        "Admin Image Manager panel is only visible/accessible to authenticated admin users.",
+        "All image slots are listed with their slot key label and current preview image.",
+        "Each slot has a 'Replace Image' file picker that accepts common image formats (jpg, png, webp, gif).",
+        "After upload, the slot preview updates to show the newly uploaded image without a full page reload.",
+        "Upload progress or loading state is shown while the blob is being sent to the backend.",
+        "Non-admin users cannot access or see the Image Manager panel."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Update Hero.tsx, ShapeShowcases.tsx, and AboutResin.tsx to fetch their respective image slots from the backend via the getImage endpoint. If a custom image has been uploaded for a slot, render it in place of the current static asset; otherwise fall back to the existing static image.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-7"
+        ],
+        "quotes": [
+          "all the areas that takes an image"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Hero section product image uses the 'hero' slot from the backend if available.",
+        "Each ShapeShowcases card (Square, Heart, Hexagon, Headstone) uses its respective backend slot image if available.",
+        "AboutResin section uses the 'about-resin' slot from the backend if available.",
+        "All sections fall back to their existing static assets when no custom image has been uploaded for that slot.",
+        "Image fetching does not block page render; images load asynchronously."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Add a React Query hook (e.g. useImageSlot) that fetches an image blob from the backend for a given slot key and returns a local object URL for use in img src attributes. Add a useUploadImage mutation hook that calls the backend uploadImage endpoint.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-7"
+        ],
+        "quotes": [
+          "create an image upload area in the backend where I can upload my own photos in all the areas that takes an image"
+        ]
+      },
+      "acceptanceCriteria": [
+        "useImageSlot(key) returns a data URL or object URL when a custom image is stored for that key, or undefined when none exists.",
+        "useUploadImage mutation accepts a slot key, File object, and mime type, encodes it as a blob, and calls the backend.",
+        "Both hooks are defined in the frontend/src/hooks/ directory following existing hook conventions.",
+        "Query cache is invalidated for the affected slot after a successful upload."
       ]
     }
   ],
   "constraints": [
-    "Do not modify any immutable frontend paths (hooks, main.tsx, ui components)",
-    "Only the Headstone shape card image should be updated in ShapeShowcases.tsx"
+    "Do not modify files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui.",
+    "All backend logic must remain in the single actor file backend/main.mo.",
+    "Image upload endpoint must be admin-only; anonymous callers must be rejected."
   ],
   "nonGoals": [
-    "Changing backend data models or order logic",
-    "Modifying any other shape showcase cards (Square, Heart, Hexagon)",
-    "Adding new routes or pages"
+    "Public-facing image upload by end customers (only admin uploads are in scope).",
+    "Image resizing, cropping, or any server-side image processing.",
+    "CDN or external storage integration — all blobs are stored in the canister.",
+    "Changing the existing order form pet photo upload flow."
   ],
   "imageRequirements": {
-    "required": [
-      "Clear transparent resin headstone mold shape with colorful flowers (roses, daisies) and green grass blades embedded inside the resin, centered with a male Yorkshire Terrier (Yorkie) dog portrait inside a solid black square frame on the face of the headstone, photorealistic resin craft style (ponce-headstone-mold.dim_800x900.png)"
-    ],
+    "required": [],
     "edits": []
   }
 }

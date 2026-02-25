@@ -3,16 +3,16 @@ import Nat "mo:core/Nat";
 import Principal "mo:core/Principal";
 import Iter "mo:core/Iter";
 import Runtime "mo:core/Runtime";
+import Text "mo:core/Text";
 import MixinStorage "blob-storage/Mixin";
 import MixinAuthorization "authorization/MixinAuthorization";
 import AccessControl "authorization/access-control";
-
-
 import Storage "blob-storage/Storage";
 import Stripe "stripe/stripe";
 import OutCall "http-outcalls/outcall";
+import Migration "migration";
 
-
+(with migration = Migration.run)
 actor {
   type UserProfile = {
     name : Text;
@@ -86,6 +86,38 @@ actor {
   var nextOrderId = 1;
   let orders = Map.empty<Nat, AstCloudOrder>();
   let userProfiles = Map.empty<Principal, UserProfile>();
+  let blobSlots = Map.empty<Text, BlobSlot>();
+
+  type BlobSlot = {
+    key : Text;
+    blob : Storage.ExternalBlob;
+    name : Text;
+  };
+
+  // Admin-only: upload/replace a named image blob for a given slot key
+  public shared ({ caller }) func uploadBlob(key : Text, blob : Storage.ExternalBlob, name : Text) : async () {
+    if (not (AccessControl.hasPermission(accessControlState, caller, #admin))) {
+      Runtime.trap("Unauthorized: Only admins can upload blobs");
+    };
+
+    let newBlobSlot : BlobSlot = {
+      key;
+      blob;
+      name;
+    };
+
+    blobSlots.add(key, newBlobSlot);
+  };
+
+  // Public: blob slots are static site assets viewable by anyone (including guests)
+  public query func getBlobByKey(key : Text) : async ?BlobSlot {
+    blobSlots.get(key);
+  };
+
+  // Public: blob slots are static site assets viewable by anyone (including guests)
+  public query func listBlobs() : async [BlobSlot] {
+    blobSlots.values().toArray();
+  };
 
   public query ({ caller }) func getCallerUserProfile() : async ?UserProfile {
     if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
@@ -203,7 +235,11 @@ actor {
     };
   };
 
-  public func getStripeSessionStatus(sessionId : Text) : async Stripe.StripeSessionStatus {
+  // Requires #user: payment session status should only be checked by authenticated users
+  public shared ({ caller }) func getStripeSessionStatus(sessionId : Text) : async Stripe.StripeSessionStatus {
+    if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
+      Runtime.trap("Unauthorized: Only users can check session status");
+    };
     await Stripe.getSessionStatus(getStripeConfiguration(), sessionId, transform);
   };
 

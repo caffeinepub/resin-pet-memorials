@@ -1,25 +1,32 @@
 {
   "schemaVersion": "1.0.0",
   "projectStateVersion": 3,
-  "summary": "Project involves creating a clear resin headstone mold design for Ponce, featuring flowers, grass, and a male Yorkie picture inside a black square frame.",
+  "summary": "New project",
   "architectural_notes": [],
   "known_issues": [],
   "isFixRequest": false,
-  "imageRequirements": "## Required Images\n- Clear transparent resin headstone mold shape with colorful flowers (roses, daisies) and green grass blades embedded inside the resin, centered with a male Yorkshire Terrier (Yorkie) dog portrait inside a solid black square frame on the face of the headstone, photorealistic resin craft style (ponce-headstone-mold.dim_800x900.png)",
   "existing_features": [
     {
-      "id": "feature-generate-a-new-headstone-mold-product-image-showing-a-clear-resin-headstone-shape-with-flowers-and-green-grass-elements-embedded-inside-and-a-male-yorkie-dog-portrait-displayed-inside-a-black-square-frame-centered-on-the-headstone-this-image-should-replace-or-be-used-as-the-headstone-shape-showcase-image-in-shapeshowcases-tsx",
-      "title": "Generate a new headstone mold product image showing a clear resin headstone shape with flowers and green grass elements embedded inside, and a male Yorkie dog portrait displayed inside a black square frame centered on the headstone. This image should replace or be used as the Headstone shape showcase image in ShapeShowcases.tsx.",
+      "id": "feature-create-an-admin-only-image-manager-panel-in-the-frontend-accessible-from-the-existing-admin-area-or-via-a-protected-route-that-lists-every-image-slot-hero-shape-square-shape-heart-shape-hexagon-shape-headstone-about-resin-order-photo-preview-with-its-current-image-preview-and-a-file-picker-upload-button-uploading-a-new-file-for-a-slot-calls-the-backend-uploadimage-endpoint-and-refreshes-the-displayed-preview",
+      "title": "Create an admin-only 'Image Manager' panel in the frontend (accessible from the existing admin area or via a protected route) that lists every image slot (hero, shape-square, shape-heart, shape-hexagon, shape-headstone, about-resin, order-photo-preview) with its current image preview and a file-picker upload button. Uploading a new file for a slot calls the backend uploadImage endpoint and refreshes the displayed preview.",
       "reqIds": [
-        "REQ-1"
+        "REQ-2"
       ],
       "version": 1
     },
     {
-      "id": "feature-update-the-headstone-shape-card-in-shapeshowcases-tsx-to-render-the-newly-generated-clear-resin-headstone-mold-image-ponce-headstone-mold-dim-800x900-png-as-its-showcase-photo",
-      "title": "Update the Headstone shape card in ShapeShowcases.tsx to render the newly generated clear resin headstone mold image (ponce-headstone-mold.dim_800x900.png) as its showcase photo.",
+      "id": "feature-update-hero-tsx-shapeshowcases-tsx-and-aboutresin-tsx-to-fetch-their-respective-image-slots-from-the-backend-via-the-getimage-endpoint-if-a-custom-image-has-been-uploaded-for-a-slot-render-it-in-place-of-the-current-static-asset-otherwise-fall-back-to-the-existing-static-image",
+      "title": "Update Hero.tsx, ShapeShowcases.tsx, and AboutResin.tsx to fetch their respective image slots from the backend via the getImage endpoint. If a custom image has been uploaded for a slot, render it in place of the current static asset; otherwise fall back to the existing static image.",
       "reqIds": [
-        "REQ-2"
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-react-query-hook-e-g-useimageslot-that-fetches-an-image-blob-from-the-backend-for-a-given-slot-key-and-returns-a-local-object-url-for-use-in-img-src-attributes-add-a-useuploadimage-mutation-hook-that-calls-the-backend-uploadimage-endpoint",
+      "title": "Add a React Query hook (e.g. useImageSlot) that fetches an image blob from the backend for a given slot key and returns a local object URL for use in img src attributes. Add a useUploadImage mutation hook that calls the backend uploadImage endpoint.",
+      "reqIds": [
+        "REQ-4"
       ],
       "version": 1
     }
@@ -27,13 +34,20 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Clear resin headstone mold with flowers, grass, and a male Yorkie picture inside a black square frame for Ponce's headstone",
+      "summary": "Add backend image upload area allowing custom photo uploads for all image-accepting sections",
       "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Extend the backend actor to store named image blobs with associated slot keys (e.g. 'hero', 'shape-square', 'shape-heart', 'shape-hexagon', 'shape-headstone', 'about-resin') using stable storage. Provide upload, retrieve-by-key, and list endpoints. Uploaded blobs replace the default static asset for that slot.",
+      "reqIds": [
+        "REQ-1"
+      ],
       "status": "pending"
     }
   ],
-  "gameProjectType": "none",
-  "projectName": "Ponce Headstone Mold",
+  "projectName": "Furever Keepsakes",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

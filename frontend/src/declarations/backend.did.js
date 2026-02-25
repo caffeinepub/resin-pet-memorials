@@ -39,6 +39,11 @@ export const HeadstoneDesign = IDL.Record({
   'headstoneFrame' : ExternalBlob,
   'roundFrame' : ExternalBlob,
 });
+export const BlobSlot = IDL.Record({
+  'key' : IDL.Text,
+  'blob' : ExternalBlob,
+  'name' : IDL.Text,
+});
 export const UserProfile = IDL.Record({
   'name' : IDL.Text,
   'email' : IDL.Text,
@@ -156,6 +161,7 @@ export const idlService = IDL.Service({
       [IDL.Vec(HeadstoneDesign)],
       ['query'],
     ),
+  'getBlobByKey' : IDL.Func([IDL.Text], [IDL.Opt(BlobSlot)], ['query']),
   'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
   'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
   'getOrders' : IDL.Func([], [IDL.Vec(AstCloudOrder)], ['query']),
@@ -167,6 +173,7 @@ export const idlService = IDL.Service({
     ),
   'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
   'isStripeConfigured' : IDL.Func([], [IDL.Bool], ['query']),
+  'listBlobs' : IDL.Func([], [IDL.Vec(BlobSlot)], ['query']),
   'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
   'setStripeConfiguration' : IDL.Func([StripeConfiguration], [], []),
   'submitOrder' : IDL.Func(
@@ -193,6 +200,7 @@ export const idlService = IDL.Service({
       [TransformationOutput],
       ['query'],
     ),
+  'uploadBlob' : IDL.Func([IDL.Text, ExternalBlob, IDL.Text], [], []),
 });
 
 export const idlInitArgs = [];
@@ -228,6 +236,11 @@ export const idlFactory = ({ IDL }) => {
     'ovalFrame' : ExternalBlob,
     'headstoneFrame' : ExternalBlob,
     'roundFrame' : ExternalBlob,
+  });
+  const BlobSlot = IDL.Record({
+    'key' : IDL.Text,
+    'blob' : ExternalBlob,
+    'name' : IDL.Text,
   });
   const UserProfile = IDL.Record({ 'name' : IDL.Text, 'email' : IDL.Text });
   const PaymentStatus = IDL.Variant({
@@ -340,6 +353,7 @@ export const idlFactory = ({ IDL }) => {
         [IDL.Vec(HeadstoneDesign)],
         ['query'],
       ),
+    'getBlobByKey' : IDL.Func([IDL.Text], [IDL.Opt(BlobSlot)], ['query']),
     'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
     'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
     'getOrders' : IDL.Func([], [IDL.Vec(AstCloudOrder)], ['query']),
@@ -351,6 +365,7 @@ export const idlFactory = ({ IDL }) => {
       ),
     'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
     'isStripeConfigured' : IDL.Func([], [IDL.Bool], ['query']),
+    'listBlobs' : IDL.Func([], [IDL.Vec(BlobSlot)], ['query']),
     'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
     'setStripeConfiguration' : IDL.Func([StripeConfiguration], [], []),
     'submitOrder' : IDL.Func(
@@ -377,6 +392,7 @@ export const idlFactory = ({ IDL }) => {
         [TransformationOutput],
         ['query'],
       ),
+    'uploadBlob' : IDL.Func([IDL.Text, ExternalBlob, IDL.Text], [], []),
   });
 };
 

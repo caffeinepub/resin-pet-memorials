@@ -1,23 +1,87 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-25T19:40:47.037Z",
-  "summary": "The diff shows that ShapeShowcases.tsx has been updated to include a Ponce headstone card referencing the new image path '/assets/generated/ponce-headstone-mold.dim_800x900.png', and no other shape cards were modified. However, the actual image file (ponce-headstone-mold.dim_800x900.png) does not appear in the diff as an added file, meaning REQ-1's image generation requirement may not be fulfilled by the diff evidence alone.",
+  "generatedAt": "2026-02-25T19:53:32.623Z",
+  "summary": "The diff implements most of the required functionality. Backend storage with uploadBlob/getBlobByKey/listBlobs endpoints, admin-only ImageManager panel, updated Hero/ShapeShowcases/AboutResin components, and useImageSlot/useUploadImage hooks are all present. However, there are several gaps: the backend endpoint names differ from the spec (uploadBlob vs uploadImage, getBlobByKey vs getImage, listBlobs vs listImageKeys), the 'order-photo-preview' slot is missing from the Image Manager panel, and the useImageSlot hook uses getDirectURL() rather than constructing a proper object URL from blob bytes. The REQ-1 AC specifying uploadImage(key, data, mimeType) is not matched as the implementation uses uploadBlob(key, blob, name) with name instead of mimeType.",
   "missing_requirements": [
     {
       "id": "REQ-1",
-      "requirement": "Generate a new headstone mold product image (ponce-headstone-mold.dim_800x900.png) showing a clear resin headstone shape with flowers and green grass elements embedded inside, and a male Yorkie dog portrait displayed inside a black square frame centered on the headstone.",
-      "reason": "The diff shows no added binary/image files. The 'ADDED FILES: none' entry confirms no new image asset was added in this diff. The image file at frontend/public/assets/generated/ponce-headstone-mold.dim_800x900.png is not present as an added file.",
+      "requirement": "Backend exposes an uploadImage(key: Text, data: Blob, mimeType: Text) endpoint restricted to admin callers.",
+      "reason": "The backend exposes uploadBlob(key, blob, name) instead of uploadImage(key, data, mimeType). The third parameter is 'name' (a label string) rather than 'mimeType' as specified.",
       "evidence": [
-        "frontend/src/components/marketing/Sections/ShapeShowcases.tsx"
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-1",
+      "requirement": "Backend exposes a getImage(key: Text) endpoint returning the stored blob and mime type.",
+      "reason": "The backend exposes getBlobByKey(key) instead of getImage(key). The returned BlobSlot type stores 'name' rather than 'mimeType', so mime type is not returned as specified.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-1",
+      "requirement": "Backend exposes a listImageKeys() endpoint returning all currently stored slot keys.",
+      "reason": "The backend exposes listBlobs() which returns full BlobSlot objects, not listImageKeys() returning only slot key strings as specified.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "requirement": "All image slots are listed including 'order-photo-preview'.",
+      "reason": "The IMAGE_SLOTS array in ImageManager.tsx defines only 6 slots (hero, shape-square, shape-heart, shape-hexagon, shape-headstone, about-resin) but omits the required 'order-photo-preview' slot.",
+      "evidence": [
+        "frontend/src/components/admin/ImageManager.tsx"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "requirement": "useImageSlot(key) returns a data URL or object URL when a custom image is stored for that key.",
+      "reason": "The useImageSlot hook calls slot.blob.getDirectURL() rather than fetching raw bytes and constructing a local object URL. This does not match the spec requirement of returning a local object URL from blob bytes.",
+      "evidence": [
+        "frontend/src/hooks/useImageSlot.ts"
       ]
     }
   ],
-  "hallucinated_features": [],
-  "confidence": 0.82,
+  "hallucinated_features": [
+    {
+      "description": "A separate backend/migration.mo module added with OldActor/NewActor type definitions and a run() migration function.",
+      "reason": "The build request only required stable storage persistence across upgrades, not a separate migration module file.",
+      "evidence": [
+        "backend/migration.mo"
+      ]
+    },
+    {
+      "description": "useUploadImage hook calls uploadBlob with a 'name' parameter derived from file.name instead of mimeType.",
+      "reason": "The spec requires calling uploadImage with a mimeType parameter. The hook uses uploadBlob with a name string instead, diverging from the specified interface.",
+      "evidence": [
+        "frontend/src/hooks/useUploadImage.ts"
+      ]
+    },
+    {
+      "description": "Admin toolbar banner with a persistent 'Manage Images' button added to the main page layout.",
+      "reason": "The spec requires an admin-only Image Manager accessible from the existing admin area or a protected route, but does not specify a persistent admin toolbar banner on the main page.",
+      "evidence": [
+        "frontend/src/App.tsx"
+      ]
+    }
+  ],
+  "confidence": 0.72,
   "changed_files": [
+    "backend/main.mo",
+    "backend/migration.mo",
     "frontend-file-summaries.txt",
+    "frontend/src/App.tsx",
+    "frontend/src/components/admin/ImageManager.tsx",
+    "frontend/src/components/admin/ImageSlotCard.tsx",
+    "frontend/src/components/marketing/Sections/AboutResin.tsx",
+    "frontend/src/components/marketing/Sections/Hero.tsx",
     "frontend/src/components/marketing/Sections/ShapeShowcases.tsx",
+    "frontend/src/hooks/useImageSlot.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/hooks/useUploadImage.ts",
     "project_state.json"
   ]
 }

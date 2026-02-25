@@ -9,13 +9,16 @@ import Footer from './components/marketing/Footer';
 import PaymentSuccess from './components/payment/PaymentSuccess';
 import PaymentFailure from './components/payment/PaymentFailure';
 import PaymentSetup from './components/payment/PaymentSetup';
+import ImageManager from './components/admin/ImageManager';
 import { useInternetIdentity } from './hooks/useInternetIdentity';
-import { useGetCallerUserProfile } from './hooks/useQueries';
+import { useGetCallerUserProfile, useIsCallerAdmin } from './hooks/useQueries';
 import { Button } from './components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from './components/ui/dialog';
 import { Input } from './components/ui/input';
 import { Label } from './components/ui/label';
 import { useState } from 'react';
+import { Images } from 'lucide-react';
+import { useNavigate, useRouterState } from '@tanstack/react-router';
 
 function Layout() {
   return (
@@ -90,10 +93,20 @@ function ProfileSetupModal({ onComplete }: { onComplete: (name: string, email: s
   );
 }
 
+function AdminImageManagerPage() {
+  const navigate = useNavigate();
+  return (
+    <ImageManager onBack={() => navigate({ to: '/' })} />
+  );
+}
+
 function MainPage() {
   const { identity } = useInternetIdentity();
   const { data: userProfile, isLoading: profileLoading, isFetched } = useGetCallerUserProfile();
   const { saveProfile } = useGetCallerUserProfile();
+  const { data: isAdmin } = useIsCallerAdmin();
+  const navigate = useNavigate();
+  const routerState = useRouterState();
 
   const isAuthenticated = !!identity && !identity.getPrincipal().isAnonymous();
   const showProfileSetup = isAuthenticated && !profileLoading && isFetched && userProfile === null;
@@ -102,9 +115,41 @@ function MainPage() {
     await saveProfile({ name, email });
   };
 
+  // Don't render main layout on sub-routes
+  const currentPath = routerState.location.pathname;
+  if (currentPath !== '/') {
+    return null;
+  }
+
   return (
     <>
-      <Layout />
+      <div className="min-h-screen bg-background">
+        <Header />
+        {isAdmin && (
+          <div className="bg-primary/5 border-b border-primary/20">
+            <div className="container py-2 flex items-center justify-between">
+              <span className="text-sm text-muted-foreground">Admin Mode</span>
+              <Button
+                size="sm"
+                variant="outline"
+                className="gap-2"
+                onClick={() => navigate({ to: '/admin/images' })}
+              >
+                <Images className="h-4 w-4" />
+                Manage Images
+              </Button>
+            </div>
+          </div>
+        )}
+        <main>
+          <Hero />
+          <AboutResin />
+          <ShapeShowcases />
+          <OrderForm />
+          <ProcessSteps />
+        </main>
+        <Footer />
+      </div>
       {showProfileSetup && <ProfileSetupModal onComplete={handleProfileComplete} />}
       <PaymentSetup />
     </>
@@ -113,6 +158,12 @@ function MainPage() {
 
 const rootRoute = createRootRoute({
   component: MainPage,
+});
+
+const indexRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/',
+  component: () => null,
 });
 
 const paymentSuccessRoute = createRoute({
@@ -127,7 +178,18 @@ const paymentFailureRoute = createRoute({
   component: PaymentFailure,
 });
 
-const routeTree = rootRoute.addChildren([paymentSuccessRoute, paymentFailureRoute]);
+const adminImagesRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/admin/images',
+  component: AdminImageManagerPage,
+});
+
+const routeTree = rootRoute.addChildren([
+  indexRoute,
+  paymentSuccessRoute,
+  paymentFailureRoute,
+  adminImagesRoute,
+]);
 
 const router = createRouter({ routeTree });
 

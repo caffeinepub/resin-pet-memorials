@@ -2,30 +2,12 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-generate-a-new-headstone-mold-product-image-showing-a-clear-resin-headstone-shape-with-flowers-and-green-grass-elements-embedded-inside-and-a-male-yorkie-dog-portrait-displayed-inside-a-black-square-frame-centered-on-the-headstone-this-image-should-replace-or-be-used-as-the-headstone-shape-showcase-image-in-shapeshowcases-tsx",
-      "featureTitle": "Generate a new headstone mold product image showing a clear resin headstone shape with flowers and green grass elements embedded inside, and a male Yorkie dog portrait displayed inside a black square frame centered on the headstone. This image should replace or be used as the Headstone shape showcase image in ShapeShowcases.tsx.",
-      "files": [],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "blob-storage@4.0.0",
-        "stripe@3.0.0",
-        "http-outcalls@3.0.0",
-        "authorization@4.0.0"
-      ],
-      "testIds": [
-        "REQ-1"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-update-the-headstone-shape-card-in-shapeshowcases-tsx-to-render-the-newly-generated-clear-resin-headstone-mold-image-ponce-headstone-mold-dim-800x900-png-as-its-showcase-photo",
-      "featureTitle": "Update the Headstone shape card in ShapeShowcases.tsx to render the newly generated clear resin headstone mold image (ponce-headstone-mold.dim_800x900.png) as its showcase photo.",
+      "featureId": "feature-create-an-admin-only-image-manager-panel-in-the-frontend-accessible-from-the-existing-admin-area-or-via-a-protected-route-that-lists-every-image-slot-hero-shape-square-shape-heart-shape-hexagon-shape-headstone-about-resin-order-photo-preview-with-its-current-image-preview-and-a-file-picker-upload-button-uploading-a-new-file-for-a-slot-calls-the-backend-uploadimage-endpoint-and-refreshes-the-displayed-preview",
+      "featureTitle": "Create an admin-only 'Image Manager' panel in the frontend (accessible from the existing admin area or via a protected route) that lists every image slot (hero, shape-square, shape-heart, shape-hexagon, shape-headstone, about-resin, order-photo-preview) with its current image preview and a file-picker upload button. Uploading a new file for a slot calls the backend uploadImage endpoint and refreshes the displayed preview.",
       "files": [
-        "frontend/src/components/marketing/Sections/ShapeShowcases.tsx"
+        "frontend/src/App.tsx",
+        "frontend/src/components/admin/ImageManager.tsx",
+        "frontend/src/components/admin/ImageSlotCard.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -40,6 +22,54 @@
       ],
       "testIds": [
         "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-hero-tsx-shapeshowcases-tsx-and-aboutresin-tsx-to-fetch-their-respective-image-slots-from-the-backend-via-the-getimage-endpoint-if-a-custom-image-has-been-uploaded-for-a-slot-render-it-in-place-of-the-current-static-asset-otherwise-fall-back-to-the-existing-static-image",
+      "featureTitle": "Update Hero.tsx, ShapeShowcases.tsx, and AboutResin.tsx to fetch their respective image slots from the backend via the getImage endpoint. If a custom image has been uploaded for a slot, render it in place of the current static asset; otherwise fall back to the existing static image.",
+      "files": [
+        "frontend/src/components/marketing/Sections/AboutResin.tsx",
+        "frontend/src/components/marketing/Sections/Hero.tsx",
+        "frontend/src/components/marketing/Sections/ShapeShowcases.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0",
+        "stripe@3.0.0",
+        "http-outcalls@3.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-react-query-hook-e-g-useimageslot-that-fetches-an-image-blob-from-the-backend-for-a-given-slot-key-and-returns-a-local-object-url-for-use-in-img-src-attributes-add-a-useuploadimage-mutation-hook-that-calls-the-backend-uploadimage-endpoint",
+      "featureTitle": "Add a React Query hook (e.g. useImageSlot) that fetches an image blob from the backend for a given slot key and returns a local object URL for use in img src attributes. Add a useUploadImage mutation hook that calls the backend uploadImage endpoint.",
+      "files": [
+        "frontend/src/hooks/useImageSlot.ts",
+        "frontend/src/hooks/useQueries.ts",
+        "frontend/src/hooks/useUploadImage.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0",
+        "stripe@3.0.0",
+        "http-outcalls@3.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
       ],
       "confidence": "high"
     }

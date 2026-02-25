@@ -4,18 +4,59 @@ import Principal "mo:core/Principal";
 import Storage "blob-storage/Storage";
 
 module {
-  type OldAstCloudOrder = {
-    id : Nat;
-    owner : Principal;
-    animal : Animal;
-    headstoneDesign : HeadstoneDesign;
-    paymentMethod : PaymentMethod;
-    paymentStatus : PaymentStatus;
-    shippingAddress : Address;
-    contactInfo : ContactInfo;
+  type UserProfile = {
+    name : Text;
+    email : Text;
   };
 
-  type NewAstCloudOrder = {
+  type Animal = {
+    name : Text;
+    birthDate : Nat;
+    passingDate : ?Nat;
+    photo : ?Storage.ExternalBlob;
+  };
+
+  type HeadstoneDesign = {
+    peninsulaFrame : Storage.ExternalBlob;
+    ovalFrame : Storage.ExternalBlob;
+    squareFrame : Storage.ExternalBlob;
+    roundFrame : Storage.ExternalBlob;
+    headstoneFrame : Storage.ExternalBlob;
+  };
+
+  type PaymentStatus = {
+    #pending;
+    #completed : Text;
+    #failed : Text;
+  };
+
+  type PaymentMethod = {
+    #stripe;
+    #paypal;
+    #crypto;
+  };
+
+  type Address = {
+    streetAddress : Text;
+    addressLine2 : ?Text;
+    city : Text;
+    stateOrProvince : Text;
+    postalCode : Text;
+    country : Text;
+    phoneNumber : Text;
+  };
+
+  type ContactInfo = {
+    email : Text;
+    phoneNumber : Text;
+  };
+
+  type BuyerInfo = {
+    firstName : Text;
+    lastName : Text;
+  };
+
+  type AstCloudOrder = {
     id : Nat;
     owner : Principal;
     animal : Animal;
@@ -28,74 +69,25 @@ module {
   };
 
   type OldActor = {
-    orders : Map.Map<Nat, OldAstCloudOrder>;
+    nextOrderId : Nat;
+    orders : Map.Map<Nat, AstCloudOrder>;
+    userProfiles : Map.Map<Principal, UserProfile>;
+  };
+
+  type BlobSlot = {
+    key : Text;
+    blob : Storage.ExternalBlob;
+    name : Text;
   };
 
   type NewActor = {
-    orders : Map.Map<Nat, NewAstCloudOrder>;
-  };
-
-  public type PaymentMethod = {
-    #stripe;
-    #paypal;
-    #crypto;
-  };
-
-  public type Address = {
-    streetAddress : Text;
-    addressLine2 : ?Text;
-    city : Text;
-    stateOrProvince : Text;
-    postalCode : Text;
-    country : Text;
-    phoneNumber : Text;
-  };
-
-  public type ContactInfo = {
-    email : Text;
-    phoneNumber : Text;
-  };
-
-  public type BuyerInfo = {
-    firstName : Text;
-    lastName : Text;
-  };
-
-  public type PaymentStatus = {
-    #pending;
-    #completed : Text;
-    #failed : Text;
-  };
-
-  type Animal = {
-    name : Text;
-    birthDate : Nat;
-    deathDate : Nat;
-    photo : ?Storage.ExternalBlob;
-  };
-
-  type HeadstoneDesign = {
-    peninsulaFrame : Storage.ExternalBlob;
-    ovalFrame : Storage.ExternalBlob;
-    squareFrame : Storage.ExternalBlob;
-    roundFrame : Storage.ExternalBlob;
-    headstoneFrame : Storage.ExternalBlob;
-  };
-
-  let defaultBuyerInfo = {
-    firstName = "unknown";
-    lastName = "unknown";
+    nextOrderId : Nat;
+    orders : Map.Map<Nat, AstCloudOrder>;
+    userProfiles : Map.Map<Principal, UserProfile>;
+    blobSlots : Map.Map<Text, BlobSlot>;
   };
 
   public func run(old : OldActor) : NewActor {
-    let newOrders = old.orders.map<Nat, OldAstCloudOrder, NewAstCloudOrder>(
-      func(_id, oldOrder) {
-        {
-          oldOrder with
-          buyerInfo = defaultBuyerInfo;
-        };
-      }
-    );
-    { orders = newOrders };
+    { old with blobSlots = Map.empty<Text, BlobSlot>() };
   };
 };

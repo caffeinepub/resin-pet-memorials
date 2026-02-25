@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useActor } from './useActor';
-import { UserProfile, AstCloudOrder, PaymentMethod, ShoppingItem, Address, ContactInfo, BuyerInfo } from '../backend';
+import { UserProfile, AstCloudOrder, PaymentMethod, ShoppingItem, Address, ContactInfo, BuyerInfo, BlobSlot } from '../backend';
 import { ExternalBlob } from '../backend';
 
 export function useGetCallerUserProfile() {
@@ -167,5 +167,18 @@ export function useCreateCheckoutSession() {
       }
       return session;
     },
+  });
+}
+
+export function useListImageSlots() {
+  const { actor, isFetching: actorFetching } = useActor();
+
+  return useQuery<BlobSlot[]>({
+    queryKey: ['imageSlots'],
+    queryFn: async () => {
+      if (!actor) return [];
+      return actor.listBlobs();
+    },
+    enabled: !!actor && !actorFetching,
   });
 }

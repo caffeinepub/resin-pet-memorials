@@ -36,6 +36,11 @@ export interface AstCloudOrder {
   'shippingAddress' : Address,
   'buyerInfo' : BuyerInfo,
 }
+export interface BlobSlot {
+  'key' : string,
+  'blob' : ExternalBlob,
+  'name' : string,
+}
 export interface BuyerInfo { 'lastName' : string, 'firstName' : string }
 export interface ContactInfo { 'email' : string, 'phoneNumber' : string }
 export type ExternalBlob = Uint8Array;
@@ -120,6 +125,7 @@ export interface _SERVICE {
     string
   >,
   'getAllHeadstoneDesigns' : ActorMethod<[], Array<HeadstoneDesign>>,
+  'getBlobByKey' : ActorMethod<[string], [] | [BlobSlot]>,
   'getCallerUserProfile' : ActorMethod<[], [] | [UserProfile]>,
   'getCallerUserRole' : ActorMethod<[], UserRole>,
   'getOrders' : ActorMethod<[], Array<AstCloudOrder>>,
@@ -127,6 +133,7 @@ export interface _SERVICE {
   'getUserProfile' : ActorMethod<[Principal], [] | [UserProfile]>,
   'isCallerAdmin' : ActorMethod<[], boolean>,
   'isStripeConfigured' : ActorMethod<[], boolean>,
+  'listBlobs' : ActorMethod<[], Array<BlobSlot>>,
   'saveCallerUserProfile' : ActorMethod<[UserProfile], undefined>,
   'setStripeConfiguration' : ActorMethod<[StripeConfiguration], undefined>,
   'submitOrder' : ActorMethod<
@@ -148,6 +155,7 @@ export interface _SERVICE {
     bigint
   >,
   'transform' : ActorMethod<[TransformationInput], TransformationOutput>,
+  'uploadBlob' : ActorMethod<[string, ExternalBlob, string], undefined>,
 }
 export declare const idlService: IDL.ServiceClass;
 export declare const idlInitArgs: IDL.Type[];

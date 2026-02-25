@@ -1,6 +1,9 @@
 import { Flower2, Sparkles, Image as ImageIcon } from 'lucide-react';
+import { useImageSlot } from '@/hooks/useImageSlot';
 
 export default function AboutResin() {
+  const { data: customAboutImage } = useImageSlot('about-resin');
+
   const features = [
     {
       icon: Sparkles,
@@ -31,26 +34,37 @@ export default function AboutResin() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
-          {features.map((feature, index) => {
-            const Icon = feature.icon;
-            return (
-              <div
-                key={index}
-                className="flex flex-col items-center text-center gap-4 p-6 rounded-xl bg-card border border-border/50 hover:border-primary/30 transition-colors"
-              >
-                <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Icon className="h-7 w-7 text-primary" />
+        <div className={`grid ${customAboutImage ? 'md:grid-cols-2' : 'md:grid-cols-3'} gap-8 lg:gap-12`}>
+          {customAboutImage && (
+            <div className="rounded-xl overflow-hidden border border-border/50 shadow-md">
+              <img
+                src={customAboutImage}
+                alt="About resin memorials"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          )}
+          <div className={`${customAboutImage ? 'grid grid-cols-1 gap-6' : 'contents'}`}>
+            {features.map((feature, index) => {
+              const Icon = feature.icon;
+              return (
+                <div
+                  key={index}
+                  className="flex flex-col items-center text-center gap-4 p-6 rounded-xl bg-card border border-border/50 hover:border-primary/30 transition-colors"
+                >
+                  <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center">
+                    <Icon className="h-7 w-7 text-primary" />
+                  </div>
+                  <h3 className="font-serif text-xl font-semibold text-foreground">
+                    {feature.title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {feature.description}
+                  </p>
                 </div>
-                <h3 className="font-serif text-xl font-semibold text-foreground">
-                  {feature.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {feature.description}
-                </p>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

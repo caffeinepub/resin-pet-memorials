@@ -1,7 +1,12 @@
 import { Button } from '@/components/ui/button';
 import { Heart } from 'lucide-react';
+import { useImageSlot } from '@/hooks/useImageSlot';
 
 export default function Hero() {
+  const { data: customHeroImage } = useImageSlot('hero');
+
+  const heroImage = customHeroImage || '/assets/generated/nabi-resin-headstone.dim_800x800.png';
+
   const scrollToDesigns = () => {
     const element = document.getElementById('designs');
     if (element) {
@@ -55,7 +60,7 @@ export default function Hero() {
           <div className="relative">
             <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl border border-border/50">
               <img
-                src="/assets/generated/nabi-resin-headstone.dim_800x800.png"
+                src={heroImage}
                 alt="Resin memorial with yorkie photo embedded inside, adorned with flowers and grass"
                 className="w-full h-full object-cover"
               />

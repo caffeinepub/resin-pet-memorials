@@ -27,6 +27,16 @@ export interface Animal {
     name: string;
     photo?: ExternalBlob;
 }
+export interface BlobSlot {
+    key: string;
+    blob: ExternalBlob;
+    name: string;
+}
+export interface TransformationOutput {
+    status: bigint;
+    body: Uint8Array;
+    headers: Array<http_header>;
+}
 export interface Address {
     country: string;
     city: string;
@@ -35,11 +45,6 @@ export interface Address {
     addressLine2?: string;
     phoneNumber: string;
     streetAddress: string;
-}
-export interface TransformationOutput {
-    status: bigint;
-    body: Uint8Array;
-    headers: Array<http_header>;
 }
 export interface AstCloudOrder {
     id: bigint;
@@ -124,6 +129,7 @@ export interface backendInterface {
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
     createCheckoutSession(items: Array<ShoppingItem>, successUrl: string, cancelUrl: string): Promise<string>;
     getAllHeadstoneDesigns(): Promise<Array<HeadstoneDesign>>;
+    getBlobByKey(key: string): Promise<BlobSlot | null>;
     getCallerUserProfile(): Promise<UserProfile | null>;
     getCallerUserRole(): Promise<UserRole>;
     getOrders(): Promise<Array<AstCloudOrder>>;
@@ -131,8 +137,10 @@ export interface backendInterface {
     getUserProfile(user: Principal): Promise<UserProfile | null>;
     isCallerAdmin(): Promise<boolean>;
     isStripeConfigured(): Promise<boolean>;
+    listBlobs(): Promise<Array<BlobSlot>>;
     saveCallerUserProfile(profile: UserProfile): Promise<void>;
     setStripeConfiguration(config: StripeConfiguration): Promise<void>;
     submitOrder(animalName: string, birthDate: bigint, passingDate: bigint | null, paymentMethod: PaymentMethod, photo: ExternalBlob, peninsulaFrame: ExternalBlob, ovalFrame: ExternalBlob, squareFrame: ExternalBlob, roundFrame: ExternalBlob, headstoneFrame: ExternalBlob, shippingAddress: Address, buyerInfo: BuyerInfo, contactInfo: ContactInfo): Promise<bigint>;
     transform(input: TransformationInput): Promise<TransformationOutput>;
+    uploadBlob(key: string, blob: ExternalBlob, name: string): Promise<void>;
 }
