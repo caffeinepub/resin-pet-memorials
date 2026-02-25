@@ -22,8 +22,8 @@ export interface HeadstoneDesign {
     roundFrame: ExternalBlob;
 }
 export interface Animal {
-    deathDate: bigint;
     birthDate: bigint;
+    passingDate?: bigint;
     name: string;
     photo?: ExternalBlob;
 }
@@ -123,28 +123,16 @@ export enum UserRole {
 export interface backendInterface {
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
     createCheckoutSession(items: Array<ShoppingItem>, successUrl: string, cancelUrl: string): Promise<string>;
-    /**
-     * / Retrieves all headstone designs.
-     */
     getAllHeadstoneDesigns(): Promise<Array<HeadstoneDesign>>;
-    /**
-     * / Returns the current user's profile if they are a user.
-     */
     getCallerUserProfile(): Promise<UserProfile | null>;
     getCallerUserRole(): Promise<UserRole>;
     getOrders(): Promise<Array<AstCloudOrder>>;
     getStripeSessionStatus(sessionId: string): Promise<StripeSessionStatus>;
-    /**
-     * / Returns a specified user's profile if the caller has permission.
-     */
     getUserProfile(user: Principal): Promise<UserProfile | null>;
     isCallerAdmin(): Promise<boolean>;
     isStripeConfigured(): Promise<boolean>;
-    /**
-     * / Saves the current user's profile if they are a user.
-     */
     saveCallerUserProfile(profile: UserProfile): Promise<void>;
     setStripeConfiguration(config: StripeConfiguration): Promise<void>;
-    submitOrder(animalName: string, birthDate: bigint, deathDate: bigint, paymentMethod: PaymentMethod, photo: ExternalBlob, peninsulaFrame: ExternalBlob, ovalFrame: ExternalBlob, squareFrame: ExternalBlob, roundFrame: ExternalBlob, headstoneFrame: ExternalBlob, shippingAddress: Address, buyerInfo: BuyerInfo, contactInfo: ContactInfo): Promise<bigint>;
+    submitOrder(animalName: string, birthDate: bigint, passingDate: bigint | null, paymentMethod: PaymentMethod, photo: ExternalBlob, peninsulaFrame: ExternalBlob, ovalFrame: ExternalBlob, squareFrame: ExternalBlob, roundFrame: ExternalBlob, headstoneFrame: ExternalBlob, shippingAddress: Address, buyerInfo: BuyerInfo, contactInfo: ContactInfo): Promise<bigint>;
     transform(input: TransformationInput): Promise<TransformationOutput>;
 }

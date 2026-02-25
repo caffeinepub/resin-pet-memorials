@@ -8,7 +8,6 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Separator } from '@/components/ui/separator';
 import { useSubmitOrder } from '../../hooks/useQueries';
 import { ExternalBlob, PaymentMethod } from '../../backend';
-import { useInternetIdentity } from '../../hooks/useInternetIdentity';
 import { Upload, CheckCircle2, AlertCircle, MapPin, Phone, User } from 'lucide-react';
 import PaymentMethodSelector from '../payment/PaymentMethodSelector';
 
@@ -33,8 +32,6 @@ type OrderFormData = {
 };
 
 export default function OrderForm() {
-  const { identity, login } = useInternetIdentity();
-  const isAuthenticated = !!identity && !identity.getPrincipal().isAnonymous();
   const {
     register,
     handleSubmit,
@@ -64,11 +61,6 @@ export default function OrderForm() {
   };
 
   const onSubmit = async (data: OrderFormData) => {
-    if (!isAuthenticated) {
-      login();
-      return;
-    }
-
     try {
       setSubmitSuccess(false);
       setUploadProgress(0);
@@ -85,12 +77,12 @@ export default function OrderForm() {
       const frameBlob = ExternalBlob.fromBytes(bytes);
 
       const birthDate = BigInt(new Date(data.birthDate).getTime());
-      const deathDate = BigInt(new Date(data.deathDate).getTime());
+      const passingDate = data.deathDate ? BigInt(new Date(data.deathDate).getTime()) : null;
 
       await submitOrder.mutateAsync({
         name: data.animalName,
         birthDate,
-        deathDate,
+        passingDate,
         paymentMethod,
         photo: externalBlob,
         peninsulaFrame: frameBlob,
@@ -176,16 +168,16 @@ export default function OrderForm() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="deathDate">Passing Date *</Label>
+                  <Label htmlFor="deathDate">
+                    Passing Date{' '}
+                    <span className="text-muted-foreground font-normal">(optional)</span>
+                  </Label>
                   <Input
                     id="deathDate"
                     type="date"
-                    {...register('deathDate', { required: 'Passing date is required' })}
+                    {...register('deathDate')}
                     className={errors.deathDate ? 'border-destructive' : ''}
                   />
-                  {errors.deathDate && (
-                    <p className="text-sm text-destructive">{errors.deathDate.message}</p>
-                  )}
                 </div>
               </div>
 
@@ -457,24 +449,18 @@ export default function OrderForm() {
                 <Alert variant="destructive">
                   <AlertCircle className="h-4 w-4" />
                   <AlertDescription>
-                    {submitOrder.error instanceof Error
-                      ? submitOrder.error.message
-                      : 'Failed to submit order. Please try again.'}
+                    There was an error submitting your order. Please try again.
                   </AlertDescription>
                 </Alert>
               )}
 
               <Button
                 type="submit"
-                size="lg"
                 className="w-full"
-                disabled={submitOrder.isPending || (uploadProgress > 0 && uploadProgress < 100)}
+                size="lg"
+                disabled={submitOrder.isPending}
               >
-                {!isAuthenticated
-                  ? 'Login to Submit Order'
-                  : submitOrder.isPending
-                  ? 'Submitting...'
-                  : 'Submit Order'}
+                {submitOrder.isPending ? 'Submitting Order...' : 'Submit Order'}
               </Button>
             </form>
           </CardContent>

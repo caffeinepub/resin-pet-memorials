@@ -1,55 +1,38 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Add name fields to order form, remove login button, add contact email to footer",
+  "title": "Generate clear resin headstone mold image with flowers, grass, and Yorkie portrait for Ponce",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Add 'First Name' and 'Last Name' input fields to the order form before shipping address, make them required, and include them in the order submission payload",
+      "summary": "Generate a new headstone mold product image showing a clear resin headstone shape with flowers and green grass elements embedded inside, and a male Yorkie dog portrait displayed inside a black square frame centered on the headstone",
       "acceptanceCriteria": [
-        "A 'First Name' text input appears directly above the shipping address section in the order form",
-        "A 'Last Name' text input appears directly below 'First Name' and above the shipping address section",
-        "Both fields are required and show validation errors if left blank on submission",
-        "First and last name values are sent as part of the order submission data to the backend"
+        "The headstone mold image depicts a clear/transparent resin headstone shape",
+        "Flowers and green grass are visibly embedded within the resin",
+        "A male Yorkie dog portrait is centered on the headstone inside a solid black square frame",
+        "The image is used in the Headstone card within ShapeShowcases.tsx"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/order/OrderForm.tsx",
-          "operation": "modify",
-          "description": "Add firstName and lastName state variables to the OrderForm component. Insert two new input fields (First Name and Last Name) immediately before the shipping address section, using the same styling pattern as existing form inputs. Add required validation for both fields. Update the form submission handler to include firstName and lastName in the buyerInfo object when calling submitOrder. Ensure the inputs are properly labeled and accessible."
+          "path": "frontend/public/assets/generated/ponce-headstone-mold.dim_800x900.png",
+          "operation": "create",
+          "description": "Generate a photorealistic product image of a clear transparent resin headstone mold with colorful embedded flowers (roses, daisies) and green grass blades, featuring a centered male Yorkshire Terrier (Yorkie) dog portrait inside a solid black square frame on the face of the headstone. The image must be 800x900 pixels and saved at this exact workspace path for use as a static asset in the ShapeShowcases component."
         }
       ]
     },
     {
       "id": "REQ-2",
-      "summary": "Remove the Internet Identity login/logout button from the Header component so only logo and navigation links remain visible",
+      "summary": "Update the Headstone shape card in ShapeShowcases.tsx to render the newly generated clear resin headstone mold image as its showcase photo",
       "acceptanceCriteria": [
-        "The login/logout button is no longer visible in the header on desktop or mobile",
-        "The mobile menu also does not contain a login/logout option",
-        "The header still displays the logo and navigation links correctly"
+        "The Headstone card in ShapeShowcases.tsx displays the new ponce-headstone-mold image",
+        "The image loads from frontend/public/assets/generated/ponce-headstone-mold.dim_800x900.png",
+        "No other shape cards are affected"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/marketing/Header.tsx",
+          "path": "frontend/src/components/marketing/Sections/ShapeShowcases.tsx",
           "operation": "modify",
-          "description": "Remove the Internet Identity login/logout button from both the desktop header and mobile menu. Delete the button element and any associated click handlers or authentication state references from the Header component. Ensure the remaining header layout (logo and navigation links) is properly styled and centered without the button. Do not modify the useInternetIdentity hook or any authentication logic files."
-        }
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "summary": "Add the contact email address 'all4funflorida@gmail.com' to the very bottom of the Footer component as a clickable mailto link with a descriptive label",
-      "acceptanceCriteria": [
-        "The email address 'all4funflorida@gmail.com' is displayed at the very bottom of the page footer",
-        "The email is rendered as a clickable mailto link",
-        "The link is accompanied by a short prompt such as 'Questions? Email us at' to provide context",
-        "The styling is consistent with the existing footer design"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/marketing/Footer.tsx",
-          "operation": "modify",
-          "description": "Add a new section at the very bottom of the Footer component (below the existing copyright and attribution section). Insert a text prompt such as 'Questions? Email us at' followed by a clickable mailto link to 'all4funflorida@gmail.com'. Style the email link consistently with the existing footer design, using appropriate text colors and hover states. Ensure proper spacing between this new contact section and the existing footer content."
+          "description": "Update the Headstone shape card image source to reference the newly generated ponce-headstone-mold.dim_800x900.png file. Change the image path for the Headstone card only, using the workspace path frontend/public/assets/generated/ponce-headstone-mold.dim_800x900.png. Keep all other shape cards (Square, Heart, Hexagon) unchanged. Ensure the image renders properly with appropriate alt text describing the clear resin headstone with flowers, grass, and Yorkie portrait."
         }
       ]
     }

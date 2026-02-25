@@ -2,11 +2,9 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-add-first-name-and-last-name-input-fields-to-the-order-form-in-orderform-tsx-positioned-immediately-before-the-shipping-address-fields-both-fields-should-be-required-and-their-values-should-be-included-in-the-order-submission-payload",
-      "featureTitle": "Add 'First Name' and 'Last Name' input fields to the order form in OrderForm.tsx, positioned immediately before the shipping address fields. Both fields should be required and their values should be included in the order submission payload.",
-      "files": [
-        "frontend/src/components/order/OrderForm.tsx"
-      ],
+      "featureId": "feature-generate-a-new-headstone-mold-product-image-showing-a-clear-resin-headstone-shape-with-flowers-and-green-grass-elements-embedded-inside-and-a-male-yorkie-dog-portrait-displayed-inside-a-black-square-frame-centered-on-the-headstone-this-image-should-replace-or-be-used-as-the-headstone-shape-showcase-image-in-shapeshowcases-tsx",
+      "featureTitle": "Generate a new headstone mold product image showing a clear resin headstone shape with flowers and green grass elements embedded inside, and a male Yorkie dog portrait displayed inside a black square frame centered on the headstone. This image should replace or be used as the Headstone shape showcase image in ShapeShowcases.tsx.",
+      "files": [],
       "components": [
         "core-infrastructure@1.0.2",
         "shadcn-ui@1.0.0",
@@ -24,10 +22,10 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-remove-the-internet-identity-login-logout-button-from-the-header-component-frontend-src-components-marketing-header-tsx-so-that-the-sticky-header-contains-only-the-logo-and-navigation-links-with-no-authentication-controls-visible",
-      "featureTitle": "Remove the Internet Identity login/logout button from the Header component (frontend/src/components/marketing/Header.tsx) so that the sticky header contains only the logo and navigation links, with no authentication controls visible.",
+      "featureId": "feature-update-the-headstone-shape-card-in-shapeshowcases-tsx-to-render-the-newly-generated-clear-resin-headstone-mold-image-ponce-headstone-mold-dim-800x900-png-as-its-showcase-photo",
+      "featureTitle": "Update the Headstone shape card in ShapeShowcases.tsx to render the newly generated clear resin headstone mold image (ponce-headstone-mold.dim_800x900.png) as its showcase photo.",
       "files": [
-        "frontend/src/components/marketing/Header.tsx"
+        "frontend/src/components/marketing/Sections/ShapeShowcases.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -42,28 +40,6 @@
       ],
       "testIds": [
         "REQ-2"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-add-the-contact-email-address-all4funflorida-gmail-com-to-the-very-bottom-of-the-website-in-the-footer-component-frontend-src-components-marketing-footer-tsx-presented-as-a-clickable-mailto-link-with-a-label-such-as-questions-email-us-at-all4funflorida-gmail-com",
-      "featureTitle": "Add the contact email address 'all4funflorida@gmail.com' to the very bottom of the website in the Footer component (frontend/src/components/marketing/Footer.tsx), presented as a clickable mailto link with a label such as 'Questions? Email us at all4funflorida@gmail.com'.",
-      "files": [
-        "frontend/src/components/marketing/Footer.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "blob-storage@4.0.0",
-        "stripe@3.0.0",
-        "http-outcalls@3.0.0",
-        "authorization@4.0.0"
-      ],
-      "testIds": [
-        "REQ-3"
       ],
       "confidence": "high"
     }

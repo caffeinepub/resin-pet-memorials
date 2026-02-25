@@ -1,65 +1,46 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-25T02:34:51.181Z",
+  "generatedAt": "2026-02-25T19:40:47.040Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 3,
-    "implemented": 3,
+    "total": 2,
+    "implemented": 2,
     "items": [
       {
         "id": "REQ-1",
-        "summary": "Add 'First Name' and 'Last Name' input fields to the order form in OrderForm.tsx, positioned immediately before the shipping address fields. Both fields should be required and their values should be included in the order submission payload.",
+        "summary": "Generate a new headstone mold product image showing a clear resin headstone shape with flowers and green grass elements embedded inside, and a male Yorkie dog portrait displayed inside a black square frame centered on the headstone. This image should replace or be used as the Headstone shape showcase image in ShapeShowcases.tsx.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/order/OrderForm.tsx"
+          "frontend/public/assets/generated/ponce-headstone-mold.dim_800x900.png"
         ],
         "matchedFiles": [
-          "frontend/src/components/order/OrderForm.tsx"
+          "frontend/public/assets/generated/ponce-headstone-mold.dim_800x900.png"
         ]
       },
       {
         "id": "REQ-2",
-        "summary": "Remove the Internet Identity login/logout button from the Header component (frontend/src/components/marketing/Header.tsx) so that the sticky header contains only the logo and navigation links, with no authentication controls visible.",
+        "summary": "Update the Headstone shape card in ShapeShowcases.tsx to render the newly generated clear resin headstone mold image (ponce-headstone-mold.dim_800x900.png) as its showcase photo.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/marketing/Header.tsx"
+          "frontend/src/components/marketing/Sections/ShapeShowcases.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/marketing/Header.tsx"
-        ]
-      },
-      {
-        "id": "REQ-3",
-        "summary": "Add the contact email address 'all4funflorida@gmail.com' to the very bottom of the website in the Footer component (frontend/src/components/marketing/Footer.tsx), presented as a clickable mailto link with a label such as 'Questions? Email us at all4funflorida@gmail.com'.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/components/marketing/Footer.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/components/marketing/Footer.tsx"
+          "frontend/src/components/marketing/Sections/ShapeShowcases.tsx"
         ]
       }
     ]
   },
   "changedFiles": [
-    "backend/main.mo",
-    "backend/migration.mo",
     "build-request.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/backend.d.ts",
-    "frontend/src/backend.ts",
-    "frontend/src/components/marketing/Footer.tsx",
-    "frontend/src/components/marketing/Header.tsx",
-    "frontend/src/components/order/OrderForm.tsx",
-    "frontend/src/declarations/backend.did.d.ts",
-    "frontend/src/declarations/backend.did.js",
-    "frontend/src/hooks/useQueries.ts",
+    "frontend/public/assets/generated/ponce-headstone-mold.dim_800x900.png",
+    "frontend/src/components/marketing/Sections/ShapeShowcases.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

@@ -43,7 +43,7 @@ export function useSubmitOrder() {
     mutationFn: async ({
       name,
       birthDate,
-      deathDate,
+      passingDate,
       paymentMethod,
       photo,
       peninsulaFrame,
@@ -57,7 +57,7 @@ export function useSubmitOrder() {
     }: {
       name: string;
       birthDate: bigint;
-      deathDate: bigint;
+      passingDate: bigint | null;
       paymentMethod: PaymentMethod;
       photo: ExternalBlob;
       peninsulaFrame: ExternalBlob;
@@ -73,7 +73,7 @@ export function useSubmitOrder() {
       return actor.submitOrder(
         name,
         birthDate,
-        deathDate,
+        passingDate,
         paymentMethod,
         photo,
         peninsulaFrame,

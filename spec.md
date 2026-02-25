@@ -1,11 +1,10 @@
 # Specification
 
 ## Summary
-**Goal:** Add first/last name fields to the order form, remove the login button from the header, and add a contact email to the footer.
+**Goal:** Add a new clear resin headstone mold product image featuring flowers, grass, and a Yorkie portrait for Ponce, and update the Headstone shape card to display it.
 
 **Planned changes:**
-- Add required "First Name" and "Last Name" input fields to the order form, positioned immediately before the shipping address fields, and include them in the order submission payload
-- Remove the login/logout button from the header (both desktop and mobile menu)
-- Add a clickable mailto link for `all4funflorida@gmail.com` at the bottom of the footer with a short prompt like "Questions? Email us at all4funflorida@gmail.com"
+- Generate a new image (`ponce-headstone-mold.dim_800x900.png`) showing a clear resin headstone with embedded flowers, grass, and a male Yorkie portrait in a black square frame
+- Update the Headstone shape card in `ShapeShowcases.tsx` to use the new image
 
-**User-visible outcome:** Customers filling out the order form will provide their first and last name before the shipping address, the header no longer shows a login button, and visitors can easily find and click the contact email at the bottom of every page.
+**User-visible outcome:** The Headstone shape showcase card now displays the new Ponce-themed clear resin headstone mold image with flowers, grass, and a Yorkie portrait.

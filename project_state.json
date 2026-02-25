@@ -1,35 +1,25 @@
 {
   "schemaVersion": "1.0.0",
   "projectStateVersion": 3,
-  "summary": "Simple order form and payment method website. No login button. Order form includes first/last name before shipping address fields, contact info (phone + email), and payment method. Contact email all4funflorida@gmail.com displayed at the bottom of the page.",
-  "architectural_notes": [
-    "Simple order form site — no authentication or login required",
-    "Order form field order: First Name, Last Name, Shipping Address, Contact Info (phone + email), Payment Method"
-  ],
+  "summary": "Project involves creating a clear resin headstone mold design for Ponce, featuring flowers, grass, and a male Yorkie picture inside a black square frame.",
+  "architectural_notes": [],
   "known_issues": [],
   "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Clear transparent resin headstone mold shape with colorful flowers (roses, daisies) and green grass blades embedded inside the resin, centered with a male Yorkshire Terrier (Yorkie) dog portrait inside a solid black square frame on the face of the headstone, photorealistic resin craft style (ponce-headstone-mold.dim_800x900.png)",
   "existing_features": [
     {
-      "id": "feature-add-first-name-and-last-name-input-fields-to-the-order-form-in-orderform-tsx-positioned-immediately-before-the-shipping-address-fields-both-fields-should-be-required-and-their-values-should-be-included-in-the-order-submission-payload",
-      "title": "Add 'First Name' and 'Last Name' input fields to the order form in OrderForm.tsx, positioned immediately before the shipping address fields. Both fields should be required and their values should be included in the order submission payload.",
+      "id": "feature-generate-a-new-headstone-mold-product-image-showing-a-clear-resin-headstone-shape-with-flowers-and-green-grass-elements-embedded-inside-and-a-male-yorkie-dog-portrait-displayed-inside-a-black-square-frame-centered-on-the-headstone-this-image-should-replace-or-be-used-as-the-headstone-shape-showcase-image-in-shapeshowcases-tsx",
+      "title": "Generate a new headstone mold product image showing a clear resin headstone shape with flowers and green grass elements embedded inside, and a male Yorkie dog portrait displayed inside a black square frame centered on the headstone. This image should replace or be used as the Headstone shape showcase image in ShapeShowcases.tsx.",
       "reqIds": [
         "REQ-1"
       ],
       "version": 1
     },
     {
-      "id": "feature-remove-the-internet-identity-login-logout-button-from-the-header-component-frontend-src-components-marketing-header-tsx-so-that-the-sticky-header-contains-only-the-logo-and-navigation-links-with-no-authentication-controls-visible",
-      "title": "Remove the Internet Identity login/logout button from the Header component (frontend/src/components/marketing/Header.tsx) so that the sticky header contains only the logo and navigation links, with no authentication controls visible.",
+      "id": "feature-update-the-headstone-shape-card-in-shapeshowcases-tsx-to-render-the-newly-generated-clear-resin-headstone-mold-image-ponce-headstone-mold-dim-800x900-png-as-its-showcase-photo",
+      "title": "Update the Headstone shape card in ShapeShowcases.tsx to render the newly generated clear resin headstone mold image (ponce-headstone-mold.dim_800x900.png) as its showcase photo.",
       "reqIds": [
         "REQ-2"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-the-contact-email-address-all4funflorida-gmail-com-to-the-very-bottom-of-the-website-in-the-footer-component-frontend-src-components-marketing-footer-tsx-presented-as-a-clickable-mailto-link-with-a-label-such-as-questions-email-us-at-all4funflorida-gmail-com",
-      "title": "Add the contact email address 'all4funflorida@gmail.com' to the very bottom of the website in the Footer component (frontend/src/components/marketing/Footer.tsx), presented as a clickable mailto link with a label such as 'Questions? Email us at all4funflorida@gmail.com'.",
-      "reqIds": [
-        "REQ-3"
       ],
       "version": 1
     }
@@ -37,25 +27,13 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Add first and last name fields before shipping address in order form",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-2",
-      "summary": "Remove login button from the top of the page",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-3",
-      "summary": "Add contact email all4funflorida@gmail.com at the very bottom of the website",
+      "summary": "Clear resin headstone mold with flowers, grass, and a male Yorkie picture inside a black square frame for Ponce's headstone",
       "reqIds": [],
       "status": "pending"
     }
   ],
   "gameProjectType": "none",
-  "projectName": "All4Fun Florida Order Form",
+  "projectName": "Ponce Headstone Mold",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

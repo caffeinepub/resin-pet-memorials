@@ -20,8 +20,8 @@ export interface Address {
   'streetAddress' : string,
 }
 export interface Animal {
-  'deathDate' : bigint,
   'birthDate' : bigint,
+  'passingDate' : [] | [bigint],
   'name' : string,
   'photo' : [] | [ExternalBlob],
 }
@@ -119,33 +119,21 @@ export interface _SERVICE {
     [Array<ShoppingItem>, string, string],
     string
   >,
-  /**
-   * / Retrieves all headstone designs.
-   */
   'getAllHeadstoneDesigns' : ActorMethod<[], Array<HeadstoneDesign>>,
-  /**
-   * / Returns the current user's profile if they are a user.
-   */
   'getCallerUserProfile' : ActorMethod<[], [] | [UserProfile]>,
   'getCallerUserRole' : ActorMethod<[], UserRole>,
   'getOrders' : ActorMethod<[], Array<AstCloudOrder>>,
   'getStripeSessionStatus' : ActorMethod<[string], StripeSessionStatus>,
-  /**
-   * / Returns a specified user's profile if the caller has permission.
-   */
   'getUserProfile' : ActorMethod<[Principal], [] | [UserProfile]>,
   'isCallerAdmin' : ActorMethod<[], boolean>,
   'isStripeConfigured' : ActorMethod<[], boolean>,
-  /**
-   * / Saves the current user's profile if they are a user.
-   */
   'saveCallerUserProfile' : ActorMethod<[UserProfile], undefined>,
   'setStripeConfiguration' : ActorMethod<[StripeConfiguration], undefined>,
   'submitOrder' : ActorMethod<
     [
       string,
       bigint,
-      bigint,
+      [] | [bigint],
       PaymentMethod,
       ExternalBlob,
       ExternalBlob,

@@ -58,8 +58,8 @@ export const PaymentMethod = IDL.Variant({
   'paypal' : IDL.Null,
 });
 export const Animal = IDL.Record({
-  'deathDate' : IDL.Nat,
   'birthDate' : IDL.Nat,
+  'passingDate' : IDL.Opt(IDL.Nat),
   'name' : IDL.Text,
   'photo' : IDL.Opt(ExternalBlob),
 });
@@ -173,7 +173,7 @@ export const idlService = IDL.Service({
       [
         IDL.Text,
         IDL.Nat,
-        IDL.Nat,
+        IDL.Opt(IDL.Nat),
         PaymentMethod,
         ExternalBlob,
         ExternalBlob,
@@ -245,8 +245,8 @@ export const idlFactory = ({ IDL }) => {
     'paypal' : IDL.Null,
   });
   const Animal = IDL.Record({
-    'deathDate' : IDL.Nat,
     'birthDate' : IDL.Nat,
+    'passingDate' : IDL.Opt(IDL.Nat),
     'name' : IDL.Text,
     'photo' : IDL.Opt(ExternalBlob),
   });
@@ -357,7 +357,7 @@ export const idlFactory = ({ IDL }) => {
         [
           IDL.Text,
           IDL.Nat,
-          IDL.Nat,
+          IDL.Opt(IDL.Nat),
           PaymentMethod,
           ExternalBlob,
           ExternalBlob,

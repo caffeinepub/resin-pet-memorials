@@ -97,8 +97,8 @@ export interface HeadstoneDesign {
     roundFrame: ExternalBlob;
 }
 export interface Animal {
-    deathDate: bigint;
     birthDate: bigint;
+    passingDate?: bigint;
     name: string;
     photo?: ExternalBlob;
 }
@@ -216,29 +216,17 @@ export interface backendInterface {
     _initializeAccessControlWithSecret(userSecret: string): Promise<void>;
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
     createCheckoutSession(items: Array<ShoppingItem>, successUrl: string, cancelUrl: string): Promise<string>;
-    /**
-     * / Retrieves all headstone designs.
-     */
     getAllHeadstoneDesigns(): Promise<Array<HeadstoneDesign>>;
-    /**
-     * / Returns the current user's profile if they are a user.
-     */
     getCallerUserProfile(): Promise<UserProfile | null>;
     getCallerUserRole(): Promise<UserRole>;
     getOrders(): Promise<Array<AstCloudOrder>>;
     getStripeSessionStatus(sessionId: string): Promise<StripeSessionStatus>;
-    /**
-     * / Returns a specified user's profile if the caller has permission.
-     */
     getUserProfile(user: Principal): Promise<UserProfile | null>;
     isCallerAdmin(): Promise<boolean>;
     isStripeConfigured(): Promise<boolean>;
-    /**
-     * / Saves the current user's profile if they are a user.
-     */
     saveCallerUserProfile(profile: UserProfile): Promise<void>;
     setStripeConfiguration(config: StripeConfiguration): Promise<void>;
-    submitOrder(animalName: string, birthDate: bigint, deathDate: bigint, paymentMethod: PaymentMethod, photo: ExternalBlob, peninsulaFrame: ExternalBlob, ovalFrame: ExternalBlob, squareFrame: ExternalBlob, roundFrame: ExternalBlob, headstoneFrame: ExternalBlob, shippingAddress: Address, buyerInfo: BuyerInfo, contactInfo: ContactInfo): Promise<bigint>;
+    submitOrder(animalName: string, birthDate: bigint, passingDate: bigint | null, paymentMethod: PaymentMethod, photo: ExternalBlob, peninsulaFrame: ExternalBlob, ovalFrame: ExternalBlob, squareFrame: ExternalBlob, roundFrame: ExternalBlob, headstoneFrame: ExternalBlob, shippingAddress: Address, buyerInfo: BuyerInfo, contactInfo: ContactInfo): Promise<bigint>;
     transform(input: TransformationInput): Promise<TransformationOutput>;
 }
 import type { Address as _Address, Animal as _Animal, AstCloudOrder as _AstCloudOrder, BuyerInfo as _BuyerInfo, ContactInfo as _ContactInfo, ExternalBlob as _ExternalBlob, HeadstoneDesign as _HeadstoneDesign, PaymentMethod as _PaymentMethod, PaymentStatus as _PaymentStatus, StripeSessionStatus as _StripeSessionStatus, UserProfile as _UserProfile, UserRole as _UserRole, _CaffeineStorageRefillInformation as __CaffeineStorageRefillInformation, _CaffeineStorageRefillResult as __CaffeineStorageRefillResult } from "./declarations/backend.did.d.ts";
@@ -510,17 +498,17 @@ export class Backend implements backendInterface {
             return result;
         }
     }
-    async submitOrder(arg0: string, arg1: bigint, arg2: bigint, arg3: PaymentMethod, arg4: ExternalBlob, arg5: ExternalBlob, arg6: ExternalBlob, arg7: ExternalBlob, arg8: ExternalBlob, arg9: ExternalBlob, arg10: Address, arg11: BuyerInfo, arg12: ContactInfo): Promise<bigint> {
+    async submitOrder(arg0: string, arg1: bigint, arg2: bigint | null, arg3: PaymentMethod, arg4: ExternalBlob, arg5: ExternalBlob, arg6: ExternalBlob, arg7: ExternalBlob, arg8: ExternalBlob, arg9: ExternalBlob, arg10: Address, arg11: BuyerInfo, arg12: ContactInfo): Promise<bigint> {
         if (this.processError) {
             try {
-                const result = await this.actor.submitOrder(arg0, arg1, arg2, to_candid_PaymentMethod_n33(this._uploadFile, this._downloadFile, arg3), await to_candid_ExternalBlob_n35(this._uploadFile, this._downloadFile, arg4), await to_candid_ExternalBlob_n35(this._uploadFile, this._downloadFile, arg5), await to_candid_ExternalBlob_n35(this._uploadFile, this._downloadFile, arg6), await to_candid_ExternalBlob_n35(this._uploadFile, this._downloadFile, arg7), await to_candid_ExternalBlob_n35(this._uploadFile, this._downloadFile, arg8), await to_candid_ExternalBlob_n35(this._uploadFile, this._downloadFile, arg9), to_candid_Address_n36(this._uploadFile, this._downloadFile, arg10), arg11, arg12);
+                const result = await this.actor.submitOrder(arg0, arg1, to_candid_opt_n33(this._uploadFile, this._downloadFile, arg2), to_candid_PaymentMethod_n34(this._uploadFile, this._downloadFile, arg3), await to_candid_ExternalBlob_n36(this._uploadFile, this._downloadFile, arg4), await to_candid_ExternalBlob_n36(this._uploadFile, this._downloadFile, arg5), await to_candid_ExternalBlob_n36(this._uploadFile, this._downloadFile, arg6), await to_candid_ExternalBlob_n36(this._uploadFile, this._downloadFile, arg7), await to_candid_ExternalBlob_n36(this._uploadFile, this._downloadFile, arg8), await to_candid_ExternalBlob_n36(this._uploadFile, this._downloadFile, arg9), to_candid_Address_n37(this._uploadFile, this._downloadFile, arg10), arg11, arg12);
                 return result;
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.submitOrder(arg0, arg1, arg2, to_candid_PaymentMethod_n33(this._uploadFile, this._downloadFile, arg3), await to_candid_ExternalBlob_n35(this._uploadFile, this._downloadFile, arg4), await to_candid_ExternalBlob_n35(this._uploadFile, this._downloadFile, arg5), await to_candid_ExternalBlob_n35(this._uploadFile, this._downloadFile, arg6), await to_candid_ExternalBlob_n35(this._uploadFile, this._downloadFile, arg7), await to_candid_ExternalBlob_n35(this._uploadFile, this._downloadFile, arg8), await to_candid_ExternalBlob_n35(this._uploadFile, this._downloadFile, arg9), to_candid_Address_n36(this._uploadFile, this._downloadFile, arg10), arg11, arg12);
+            const result = await this.actor.submitOrder(arg0, arg1, to_candid_opt_n33(this._uploadFile, this._downloadFile, arg2), to_candid_PaymentMethod_n34(this._uploadFile, this._downloadFile, arg3), await to_candid_ExternalBlob_n36(this._uploadFile, this._downloadFile, arg4), await to_candid_ExternalBlob_n36(this._uploadFile, this._downloadFile, arg5), await to_candid_ExternalBlob_n36(this._uploadFile, this._downloadFile, arg6), await to_candid_ExternalBlob_n36(this._uploadFile, this._downloadFile, arg7), await to_candid_ExternalBlob_n36(this._uploadFile, this._downloadFile, arg8), await to_candid_ExternalBlob_n36(this._uploadFile, this._downloadFile, arg9), to_candid_Address_n37(this._uploadFile, this._downloadFile, arg10), arg11, arg12);
             return result;
         }
     }
@@ -639,19 +627,19 @@ async function from_candid_record_n19(_uploadFile: (file: ExternalBlob) => Promi
     };
 }
 async function from_candid_record_n25(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
-    deathDate: bigint;
     birthDate: bigint;
+    passingDate: [] | [bigint];
     name: string;
     photo: [] | [_ExternalBlob];
 }): Promise<{
-    deathDate: bigint;
     birthDate: bigint;
+    passingDate?: bigint;
     name: string;
     photo?: ExternalBlob;
 }> {
     return {
-        deathDate: value.deathDate,
         birthDate: value.birthDate,
+        passingDate: record_opt_to_undefined(from_candid_opt_n7(_uploadFile, _downloadFile, value.passingDate)),
         name: value.name,
         photo: record_opt_to_undefined(await from_candid_opt_n26(_uploadFile, _downloadFile, value.photo))
     };
@@ -787,14 +775,14 @@ async function from_candid_vec_n10(_uploadFile: (file: ExternalBlob) => Promise<
 async function from_candid_vec_n17(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Array<_AstCloudOrder>): Promise<Array<AstCloudOrder>> {
     return await Promise.all(value.map(async (x)=>await from_candid_AstCloudOrder_n18(_uploadFile, _downloadFile, x)));
 }
-function to_candid_Address_n36(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Address): _Address {
-    return to_candid_record_n37(_uploadFile, _downloadFile, value);
+function to_candid_Address_n37(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Address): _Address {
+    return to_candid_record_n38(_uploadFile, _downloadFile, value);
 }
-async function to_candid_ExternalBlob_n35(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: ExternalBlob): Promise<_ExternalBlob> {
+async function to_candid_ExternalBlob_n36(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: ExternalBlob): Promise<_ExternalBlob> {
     return await _uploadFile(value);
 }
-function to_candid_PaymentMethod_n33(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: PaymentMethod): _PaymentMethod {
-    return to_candid_variant_n34(_uploadFile, _downloadFile, value);
+function to_candid_PaymentMethod_n34(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: PaymentMethod): _PaymentMethod {
+    return to_candid_variant_n35(_uploadFile, _downloadFile, value);
 }
 function to_candid_UserRole_n8(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: UserRole): _UserRole {
     return to_candid_variant_n9(_uploadFile, _downloadFile, value);
@@ -805,6 +793,9 @@ function to_candid__CaffeineStorageRefillInformation_n2(_uploadFile: (file: Exte
 function to_candid_opt_n1(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _CaffeineStorageRefillInformation | null): [] | [__CaffeineStorageRefillInformation] {
     return value === null ? candid_none() : candid_some(to_candid__CaffeineStorageRefillInformation_n2(_uploadFile, _downloadFile, value));
 }
+function to_candid_opt_n33(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: bigint | null): [] | [bigint] {
+    return value === null ? candid_none() : candid_some(value);
+}
 function to_candid_record_n3(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
     proposed_top_up_amount?: bigint;
 }): {
@@ -814,7 +805,7 @@ function to_candid_record_n3(_uploadFile: (file: ExternalBlob) => Promise<Uint8A
         proposed_top_up_amount: value.proposed_top_up_amount ? candid_some(value.proposed_top_up_amount) : candid_none()
     };
 }
-function to_candid_record_n37(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+function to_candid_record_n38(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
     country: string;
     city: string;
     postalCode: string;
@@ -841,7 +832,7 @@ function to_candid_record_n37(_uploadFile: (file: ExternalBlob) => Promise<Uint8
         streetAddress: value.streetAddress
     };
 }
-function to_candid_variant_n34(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: PaymentMethod): {
+function to_candid_variant_n35(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: PaymentMethod): {
     stripe: null;
 } | {
     crypto: null;

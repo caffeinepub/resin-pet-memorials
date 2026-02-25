@@ -1,79 +1,60 @@
 {
   "kind": "build_request",
-  "title": "Add name fields to order form, remove login button, add contact email to footer",
+  "title": "Generate clear resin headstone mold image with flowers, grass, and Yorkie portrait for Ponce",
   "projectName": "Furever Keepsakes",
   "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Add 'First Name' and 'Last Name' input fields to the order form in OrderForm.tsx, positioned immediately before the shipping address fields. Both fields should be required and their values should be included in the order submission payload.",
-      "target": "both",
+      "text": "Generate a new headstone mold product image showing a clear resin headstone shape with flowers and green grass elements embedded inside, and a male Yorkie dog portrait displayed inside a black square frame centered on the headstone. This image should replace or be used as the Headstone shape showcase image in ShapeShowcases.tsx.",
+      "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-latest"
         ],
         "quotes": [
-          "before the shipping address needs to be the first and last name of the person shipping to"
+          "make a clear resin headstone mold with flowers, grass, and a picture of a male yorkie inside a black square frame to put for Ponce headstone picture"
         ]
       },
       "acceptanceCriteria": [
-        "A 'First Name' text input appears directly above the shipping address section in the order form",
-        "A 'Last Name' text input appears directly below 'First Name' and above the shipping address section",
-        "Both fields are required and show validation errors if left blank on submission",
-        "First and last name values are sent as part of the order submission data to the backend"
+        "The headstone mold image depicts a clear/transparent resin headstone shape",
+        "Flowers and green grass are visibly embedded within the resin",
+        "A male Yorkie dog portrait is centered on the headstone inside a solid black square frame",
+        "The image is used in the Headstone card within ShapeShowcases.tsx"
       ]
     },
     {
       "id": "REQ-2",
-      "text": "Remove the Internet Identity login/logout button from the Header component (frontend/src/components/marketing/Header.tsx) so that the sticky header contains only the logo and navigation links, with no authentication controls visible.",
+      "text": "Update the Headstone shape card in ShapeShowcases.tsx to render the newly generated clear resin headstone mold image (ponce-headstone-mold.dim_800x900.png) as its showcase photo.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-latest"
         ],
         "quotes": [
-          "We also dont need a log in button at the top if this is just a simple order form and payment method"
+          "to put for Ponce headstone picture"
         ]
       },
       "acceptanceCriteria": [
-        "The login/logout button is no longer visible in the header on desktop or mobile",
-        "The mobile menu also does not contain a login/logout option",
-        "The header still displays the logo and navigation links correctly"
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "text": "Add the contact email address 'all4funflorida@gmail.com' to the very bottom of the website in the Footer component (frontend/src/components/marketing/Footer.tsx), presented as a clickable mailto link with a label such as 'Questions? Email us at all4funflorida@gmail.com'.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "Add the email address for people to ask questions to at the very bottom of the website. all4funflorida@gmail.com"
-        ]
-      },
-      "acceptanceCriteria": [
-        "The email address 'all4funflorida@gmail.com' is displayed at the very bottom of the page footer",
-        "The email is rendered as a clickable mailto link",
-        "The link is accompanied by a short prompt such as 'Questions? Email us at' to provide context",
-        "The styling is consistent with the existing footer design"
+        "The Headstone card in ShapeShowcases.tsx displays the new ponce-headstone-mold image",
+        "The image loads from frontend/public/assets/generated/ponce-headstone-mold.dim_800x900.png",
+        "No other shape cards are affected"
       ]
     }
   ],
   "constraints": [
-    "Do not modify any files under frontend/src/hooks/useInternetIdentity.ts or frontend/src/hooks/useActor.ts",
-    "Do not alter the Internet Identity authentication logic itself, only remove the UI button from the header",
-    "Preserve all existing order form fields and functionality"
+    "Do not modify any immutable frontend paths (hooks, main.tsx, ui components)",
+    "Only the Headstone shape card image should be updated in ShapeShowcases.tsx"
   ],
   "nonGoals": [
-    "Redesigning the overall header or footer layout beyond the specified changes",
-    "Adding additional contact methods (phone, social media) beyond the requested email",
-    "Changing the backend order schema beyond adding first/last name fields",
-    "Adding authentication flows or user profile features"
+    "Changing backend data models or order logic",
+    "Modifying any other shape showcase cards (Square, Heart, Hexagon)",
+    "Adding new routes or pages"
   ],
   "imageRequirements": {
-    "required": [],
+    "required": [
+      "Clear transparent resin headstone mold shape with colorful flowers (roses, daisies) and green grass blades embedded inside the resin, centered with a male Yorkshire Terrier (Yorkie) dog portrait inside a solid black square frame on the face of the headstone, photorealistic resin craft style (ponce-headstone-mold.dim_800x900.png)"
+    ],
     "edits": []
   }
 }

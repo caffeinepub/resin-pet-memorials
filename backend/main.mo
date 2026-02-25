@@ -6,12 +6,13 @@ import Runtime "mo:core/Runtime";
 import MixinStorage "blob-storage/Mixin";
 import MixinAuthorization "authorization/MixinAuthorization";
 import AccessControl "authorization/access-control";
-import Migration "migration";
+
+
 import Storage "blob-storage/Storage";
 import Stripe "stripe/stripe";
 import OutCall "http-outcalls/outcall";
 
-(with migration = Migration.run)
+
 actor {
   type UserProfile = {
     name : Text;
@@ -21,7 +22,7 @@ actor {
   type Animal = {
     name : Text;
     birthDate : Nat;
-    deathDate : Nat;
+    passingDate : ?Nat;
     photo : ?Storage.ExternalBlob;
   };
 
@@ -73,7 +74,7 @@ actor {
     paymentMethod : PaymentMethod;
     paymentStatus : PaymentStatus;
     shippingAddress : Address;
-    buyerInfo : BuyerInfo; // new field
+    buyerInfo : BuyerInfo;
     contactInfo : ContactInfo;
   };
 
@@ -86,7 +87,6 @@ actor {
   let orders = Map.empty<Nat, AstCloudOrder>();
   let userProfiles = Map.empty<Principal, UserProfile>();
 
-  /// Returns the current user's profile if they are a user.
   public query ({ caller }) func getCallerUserProfile() : async ?UserProfile {
     if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
       Runtime.trap("Unauthorized: Only users can access profiles");
@@ -94,7 +94,6 @@ actor {
     userProfiles.get(caller);
   };
 
-  /// Returns a specified user's profile if the caller has permission.
   public query ({ caller }) func getUserProfile(user : Principal) : async ?UserProfile {
     if (caller != user and not AccessControl.isAdmin(accessControlState, caller)) {
       Runtime.trap("Unauthorized: Can only view your own profile");
@@ -102,7 +101,6 @@ actor {
     userProfiles.get(user);
   };
 
-  /// Saves the current user's profile if they are a user.
   public shared ({ caller }) func saveCallerUserProfile(profile : UserProfile) : async () {
     if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
       Runtime.trap("Unauthorized: Only users can save profiles");
@@ -110,7 +108,6 @@ actor {
     userProfiles.add(caller, profile);
   };
 
-  // The getOrders function returns all orders for admins and only the caller's own orders for non-admin users.
   public query ({ caller }) func getOrders() : async [AstCloudOrder] {
     let allOrders = orders.values().toArray();
 
@@ -129,12 +126,10 @@ actor {
     userOrders;
   };
 
-  // The submitOrder function processes orders, associating them with the caller and including
-  // a buyerInfo object within the order.
   public shared ({ caller }) func submitOrder(
     animalName : Text,
     birthDate : Nat,
-    deathDate : Nat,
+    passingDate : ?Nat,
     paymentMethod : PaymentMethod,
     photo : Storage.ExternalBlob,
     peninsulaFrame : Storage.ExternalBlob,
@@ -153,7 +148,7 @@ actor {
     let animal = {
       name = animalName;
       birthDate;
-      deathDate;
+      passingDate;
       photo = ?photo;
     };
 
@@ -183,13 +178,10 @@ actor {
     order.id;
   };
 
-  /// Retrieves all headstone designs.
   public query func getAllHeadstoneDesigns() : async [HeadstoneDesign] {
     let allOrders = orders.values().toArray();
     allOrders.map(func(order) { order.headstoneDesign });
   };
-
-  // Stripe Integration using the component's core functionalities
 
   var stripeConfiguration : ?Stripe.StripeConfiguration = null;
 
