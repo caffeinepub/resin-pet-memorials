@@ -1,0 +1,69 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Add cat to heart memorial, bird to hexagon memorial, with black frames on all animal portraits",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Generate a new heart-shaped resin memorial image that includes a cat portrait (replacing or updating the Whiskers memorial image), retaining the existing flowers and grass decorations, with a black frame border surrounding the cat's portrait within the resin mold",
+      "acceptanceCriteria": [
+        "The heart-shaped resin memorial displays a visible cat portrait",
+        "The cat portrait has a black frame/border around it within the mold",
+        "Flowers and grass decorations remain visible in the heart mold image"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/marketing/Sections/ShapeShowcases.tsx",
+          "operation": "modify",
+          "description": "Update the heart memorial shape card to reference the newly generated heart memorial image at frontend/public/assets/generated/whiskers-heart-memorial.dim_600x600.png which includes a cat portrait with a black frame and preserved floral decorations"
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Generate a new hexagon-shaped resin memorial image that includes a bird portrait (replacing or updating the Tweety memorial image), retaining the existing flowers and grass decorations, with a black frame border surrounding the bird's portrait within the resin mold",
+      "acceptanceCriteria": [
+        "The hexagon-shaped resin memorial displays a visible bird portrait",
+        "The bird portrait has a black frame/border around it within the mold",
+        "Flowers and grass decorations remain visible in the hexagon mold image"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/marketing/Sections/ShapeShowcases.tsx",
+          "operation": "modify",
+          "description": "Update the hexagon memorial shape card to reference the newly generated hexagon memorial image at frontend/public/assets/generated/tweety-hexagon-memorial.dim_600x600.png which includes a bird portrait with a black frame and preserved floral decorations"
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Update the square resin memorial image (Nabi) so the animal portrait also has a black frame border surrounding it within the resin mold, consistent with the framing applied to the heart and hexagon memorials",
+      "acceptanceCriteria": [
+        "The square resin memorial (Nabi) animal portrait is surrounded by a black frame within the mold",
+        "Existing flowers and grass decorations are preserved"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/marketing/Sections/ShapeShowcases.tsx",
+          "operation": "modify",
+          "description": "Update the square memorial shape card to reference the newly generated square memorial image at frontend/public/assets/generated/nabi-square-memorial.dim_600x600.png which includes a dog portrait with a black frame and preserved floral decorations"
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Update the ShapeShowcases component to render the newly generated heart, hexagon, and square memorial images from frontend/public/assets/generated, replacing any previously used image sources for these three memorials",
+      "acceptanceCriteria": [
+        "All three memorial shape cards in ShapeShowcases display the updated generated images",
+        "No broken image links are present"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/marketing/Sections/ShapeShowcases.tsx",
+          "operation": "modify",
+          "description": "Wire the three newly generated memorial images into the ShapeShowcases component by updating the src attributes for the square, heart, and hexagon shape cards to reference frontend/public/assets/generated/nabi-square-memorial.dim_600x600.png, frontend/public/assets/generated/whiskers-heart-memorial.dim_600x600.png, and frontend/public/assets/generated/tweety-hexagon-memorial.dim_600x600.png respectively, ensuring all images are displayed correctly without broken links"
+        }
+      ]
+    }
+  ]
+}

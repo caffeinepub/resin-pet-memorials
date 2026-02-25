@@ -1,0 +1,99 @@
+{
+  "kind": "build_request",
+  "title": "Add cat to heart memorial, bird to hexagon memorial, with black frames on all animal portraits",
+  "projectName": "Furever Keepsakes and Memorials",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Generate a new heart-shaped resin memorial image that includes a cat portrait (replacing or updating the Whiskers memorial image), retaining the existing flowers and grass decorations, with a black frame border surrounding the cat's portrait within the resin mold.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-7"
+        ],
+        "quotes": [
+          "put a picture of a cat in the heart shape resin memorial",
+          "Surround all the animal pictures within the resin molds with a black frame around the image of the animal"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The heart-shaped resin memorial displays a visible cat portrait",
+        "The cat portrait has a black frame/border around it within the mold",
+        "Flowers and grass decorations remain visible in the heart mold image"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Generate a new hexagon-shaped resin memorial image that includes a bird portrait (replacing or updating the Tweety memorial image), retaining the existing flowers and grass decorations, with a black frame border surrounding the bird's portrait within the resin mold.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-7"
+        ],
+        "quotes": [
+          "put a picture of a bird in the hexagon shape memorial",
+          "Surround all the animal pictures within the resin molds with a black frame around the image of the animal"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The hexagon-shaped resin memorial displays a visible bird portrait",
+        "The bird portrait has a black frame/border around it within the mold",
+        "Flowers and grass decorations remain visible in the hexagon mold image"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Update the square resin memorial image (Nabi) so the animal portrait also has a black frame border surrounding it within the resin mold, consistent with the framing applied to the heart and hexagon memorials.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-7"
+        ],
+        "quotes": [
+          "Surround all the animal pictures within the resin molds with a black frame around the image of the animal"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The square resin memorial (Nabi) animal portrait is surrounded by a black frame within the mold",
+        "Existing flowers and grass decorations are preserved"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Update the ShapeShowcases component to render the newly generated heart, hexagon, and square memorial images from frontend/public/assets/generated, replacing any previously used image sources for these three memorials.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-7"
+        ],
+        "quotes": [
+          "put a picture of a cat in the heart shape resin memorial",
+          "put a picture of a bird in the hexagon shape memorial"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All three memorial shape cards in ShapeShowcases display the updated generated images",
+        "No broken image links are present"
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not remove or alter the flowers and grass decorations in any resin memorial image",
+    "Black frame must appear around the animal portrait inside the resin mold, not around the entire product card",
+    "Do not modify files in frontend/src/hooks/ or frontend/src/components/ui"
+  ],
+  "nonGoals": [
+    "Adding a new resin shape or memorial product",
+    "Changing the overall page layout or branding",
+    "Modifying backend data models or order logic"
+  ],
+  "imageRequirements": {
+    "required": [
+      "Heart-shaped resin mold memorial with a cute cat portrait centered inside, surrounded by a bold black rectangular frame, with flowers and green grass botanical elements embedded in clear resin (whiskers-heart-memorial.dim_600x600.png)",
+      "Hexagon-shaped resin mold memorial with a colorful bird portrait centered inside, surrounded by a bold black rectangular frame, with flowers and green grass botanical elements embedded in clear resin (tweety-hexagon-memorial.dim_600x600.png)",
+      "Square-shaped resin mold memorial with a dog portrait centered inside, surrounded by a bold black rectangular frame, with flowers and green grass botanical elements embedded in clear resin (nabi-square-memorial.dim_600x600.png)"
+    ],
+    "edits": []
+  }
+}

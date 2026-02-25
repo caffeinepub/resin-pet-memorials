@@ -1,0 +1,73 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-25T01:44:32.939Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 4,
+    "implemented": 4,
+    "items": [
+      {
+        "id": "REQ-1",
+        "summary": "Generate a new heart-shaped resin memorial image that includes a cat portrait (replacing or updating the Whiskers memorial image), retaining the existing flowers and grass decorations, with a black frame border surrounding the cat's portrait within the resin mold.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/marketing/Sections/ShapeShowcases.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/marketing/Sections/ShapeShowcases.tsx"
+        ]
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Generate a new hexagon-shaped resin memorial image that includes a bird portrait (replacing or updating the Tweety memorial image), retaining the existing flowers and grass decorations, with a black frame border surrounding the bird's portrait within the resin mold.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/marketing/Sections/ShapeShowcases.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/marketing/Sections/ShapeShowcases.tsx"
+        ]
+      },
+      {
+        "id": "REQ-3",
+        "summary": "Update the square resin memorial image (Nabi) so the animal portrait also has a black frame border surrounding it within the resin mold, consistent with the framing applied to the heart and hexagon memorials.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/marketing/Sections/ShapeShowcases.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/marketing/Sections/ShapeShowcases.tsx"
+        ]
+      },
+      {
+        "id": "REQ-4",
+        "summary": "Update the ShapeShowcases component to render the newly generated heart, hexagon, and square memorial images from frontend/public/assets/generated, replacing any previously used image sources for these three memorials.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/marketing/Sections/ShapeShowcases.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/marketing/Sections/ShapeShowcases.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "build-request.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/public/assets/generated/nabi-square-memorial.dim_600x600.png",
+    "frontend/public/assets/generated/tweety-hexagon-memorial.dim_600x600.png",
+    "frontend/public/assets/generated/whiskers-heart-memorial.dim_600x600.png",
+    "frontend/src/components/marketing/Sections/ShapeShowcases.tsx",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

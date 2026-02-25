@@ -1,0 +1,20 @@
+{
+  "frontend/src/App.tsx": "Main application component with TanStack Router setup, including routes for payment success/failure pages, profile setup modal for new users, and integration of PaymentSetup component for admin Stripe configuration.",
+  "frontend/src/components/marketing/Header.tsx": "Sticky navigation header with updated \"Furever Keepsakes and Memorials\" branding, smooth-scroll navigation links, and login/logout button with authentication state management.",
+  "frontend/src/components/marketing/Sections/Hero.tsx": "Hero section featuring the \"Furever Keepsakes and Memorials\" headline, \"Furever Preserved in Clear Resin\" tagline, description, CTA buttons, and the resin memorial image for Nabi.",
+  "frontend/src/components/marketing/Sections/AboutResin.tsx": "About section explaining the three key features of resin memorials: clear resin, natural elements, and printed photographs.",
+  "frontend/src/components/marketing/Sections/ShapeShowcases.tsx": "Design showcase section displaying three memorial cards — Nabi (square resin with Yorkie portrait), Whiskers (heart resin with cat portrait), and Tweety (hexagon resin with bird portrait) — each using newly generated memorial images with black frame overlays around the animal portraits, plus flowers and grass decorations.",
+  "frontend/src/components/marketing/Sections/ProcessSteps.tsx": "Process section outlining the four-step creation process from photo capture to resin curing with numbered cards.",
+  "frontend/src/components/marketing/Footer.tsx": "Footer component with updated \"Furever Keepsakes and Memorials\" branding, navigation links, contact info, and caffeine.ai attribution with UTM tracking.",
+  "frontend/src/index.css": "Global styles defining warm neutral color palette (terracotta primary, botanical green accent) with OKLCH tokens and custom typography (Crimson Pro serif, Inter sans-serif).",
+  "frontend/tailwind.config.js": "Tailwind configuration extending the theme with custom fonts (Crimson Pro, Inter), container padding, and maintaining OKLCH color system integration.",
+  "frontend/src/hooks/useQueries.ts": "React Query hooks for all backend operations including user profile management, order submission with blob upload progress tracking, order retrieval, Stripe configuration, admin checks, and checkout session creation with JSON parsing.",
+  "frontend/src/components/marketing/Sections/PetPhotoUpload.tsx": "Pet photo upload section with file picker, image preview, client-side validation for image files only, submission to backend via actor, and success/error state handling.",
+  "frontend/src/hooks/usePetPhotoSubmission.ts": "Custom hook that encapsulates pet photo submission logic including file-to-bytes conversion, ExternalBlob creation with upload progress tracking, backend actor integration, and state management for submission status.",
+  "frontend/index.html": "HTML entry point with updated page title to \"Furever Keepsakes and Memorials - Pet Memorials\".",
+  "frontend/src/components/order/OrderForm.tsx": "Unified order form component that collects pet name, birth/death dates, photo upload with preview, and payment method selection; handles authentication, file upload with progress tracking, and order submission with success/error states.",
+  "frontend/src/components/payment/PaymentMethodSelector.tsx": "Payment method selection component displaying radio options for Stripe (credit/debit), PayPal, and cryptocurrency with icons and descriptions.",
+  "frontend/src/components/payment/PaymentSetup.tsx": "Admin-only component that checks if Stripe is configured and displays a setup dialog for entering Stripe secret key and allowed countries when not yet configured.",
+  "frontend/src/components/payment/PaymentSuccess.tsx": "Payment success page displaying confirmation message with return-to-home button, wrapped in header and footer layout.",
+  "frontend/src/components/payment/PaymentFailure.tsx": "Payment failure page displaying error message with retry and return-to-home options, wrapped in header and footer layout."
+}

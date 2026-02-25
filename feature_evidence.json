@@ -1,0 +1,93 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-generate-a-new-heart-shaped-resin-memorial-image-that-includes-a-cat-portrait-replacing-or-updating-the-whiskers-memorial-image-retaining-the-existing-flowers-and-grass-decorations-with-a-black-frame-border-surrounding-the-cat-s-portrait-within-the-resin-mold",
+      "featureTitle": "Generate a new heart-shaped resin memorial image that includes a cat portrait (replacing or updating the Whiskers memorial image), retaining the existing flowers and grass decorations, with a black frame border surrounding the cat's portrait within the resin mold.",
+      "files": [
+        "frontend/src/components/marketing/Sections/ShapeShowcases.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0",
+        "stripe@3.0.0",
+        "http-outcalls@3.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-generate-a-new-hexagon-shaped-resin-memorial-image-that-includes-a-bird-portrait-replacing-or-updating-the-tweety-memorial-image-retaining-the-existing-flowers-and-grass-decorations-with-a-black-frame-border-surrounding-the-bird-s-portrait-within-the-resin-mold",
+      "featureTitle": "Generate a new hexagon-shaped resin memorial image that includes a bird portrait (replacing or updating the Tweety memorial image), retaining the existing flowers and grass decorations, with a black frame border surrounding the bird's portrait within the resin mold.",
+      "files": [
+        "frontend/src/components/marketing/Sections/ShapeShowcases.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0",
+        "stripe@3.0.0",
+        "http-outcalls@3.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-the-square-resin-memorial-image-nabi-so-the-animal-portrait-also-has-a-black-frame-border-surrounding-it-within-the-resin-mold-consistent-with-the-framing-applied-to-the-heart-and-hexagon-memorials",
+      "featureTitle": "Update the square resin memorial image (Nabi) so the animal portrait also has a black frame border surrounding it within the resin mold, consistent with the framing applied to the heart and hexagon memorials.",
+      "files": [
+        "frontend/src/components/marketing/Sections/ShapeShowcases.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0",
+        "stripe@3.0.0",
+        "http-outcalls@3.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-the-shapeshowcases-component-to-render-the-newly-generated-heart-hexagon-and-square-memorial-images-from-frontend-public-assets-generated-replacing-any-previously-used-image-sources-for-these-three-memorials",
+      "featureTitle": "Update the ShapeShowcases component to render the newly generated heart, hexagon, and square memorial images from frontend/public/assets/generated, replacing any previously used image sources for these three memorials.",
+      "files": [
+        "frontend/src/components/marketing/Sections/ShapeShowcases.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0",
+        "stripe@3.0.0",
+        "http-outcalls@3.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

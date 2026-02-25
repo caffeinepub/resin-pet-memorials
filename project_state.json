@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Pet memorial website (Furever Keepsakes and Memorials) featuring resin memorial products with animal portraits. Currently has three resin shapes: square (Nabi), heart (Whiskers), and hexagon (Tweety), each with flowers and grass decorations.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Heart-shaped resin mold memorial with a cute cat portrait centered inside, surrounded by a bold black rectangular frame, with flowers and green grass botanical elements embedded in clear resin (whiskers-heart-memorial.dim_600x600.png)\n- Hexagon-shaped resin mold memorial with a colorful bird portrait centered inside, surrounded by a bold black rectangular frame, with flowers and green grass botanical elements embedded in clear resin (tweety-hexagon-memorial.dim_600x600.png)\n- Square-shaped resin mold memorial with a dog portrait centered inside, surrounded by a bold black rectangular frame, with flowers and green grass botanical elements embedded in clear resin (nabi-square-memorial.dim_600x600.png)",
+  "existing_features": [
+    {
+      "id": "feature-generate-a-new-heart-shaped-resin-memorial-image-that-includes-a-cat-portrait-replacing-or-updating-the-whiskers-memorial-image-retaining-the-existing-flowers-and-grass-decorations-with-a-black-frame-border-surrounding-the-cat-s-portrait-within-the-resin-mold",
+      "title": "Generate a new heart-shaped resin memorial image that includes a cat portrait (replacing or updating the Whiskers memorial image), retaining the existing flowers and grass decorations, with a black frame border surrounding the cat's portrait within the resin mold.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-generate-a-new-hexagon-shaped-resin-memorial-image-that-includes-a-bird-portrait-replacing-or-updating-the-tweety-memorial-image-retaining-the-existing-flowers-and-grass-decorations-with-a-black-frame-border-surrounding-the-bird-s-portrait-within-the-resin-mold",
+      "title": "Generate a new hexagon-shaped resin memorial image that includes a bird portrait (replacing or updating the Tweety memorial image), retaining the existing flowers and grass decorations, with a black frame border surrounding the bird's portrait within the resin mold.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-square-resin-memorial-image-nabi-so-the-animal-portrait-also-has-a-black-frame-border-surrounding-it-within-the-resin-mold-consistent-with-the-framing-applied-to-the-heart-and-hexagon-memorials",
+      "title": "Update the square resin memorial image (Nabi) so the animal portrait also has a black frame border surrounding it within the resin mold, consistent with the framing applied to the heart and hexagon memorials.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-shapeshowcases-component-to-render-the-newly-generated-heart-hexagon-and-square-memorial-images-from-frontend-public-assets-generated-replacing-any-previously-used-image-sources-for-these-three-memorials",
+      "title": "Update the ShapeShowcases component to render the newly generated heart, hexagon, and square memorial images from frontend/public/assets/generated, replacing any previously used image sources for these three memorials.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Add cat picture in heart shape resin memorial with black frame around the animal image",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Add bird picture in hexagon shape resin memorial with black frame around the animal image",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Surround all animal pictures within resin molds with a black frame",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Furever Keepsakes and Memorials",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}
